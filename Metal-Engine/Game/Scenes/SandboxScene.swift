@@ -6,4 +6,12 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
-import Foundation
+import MetalKit
+
+class SandboxScene: Scene {
+    let player = Player()
+    
+    override func buildScene() {
+        addChild(player)
+    }
+}

@@ -6,4 +6,15 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
-import Foundation
+import MetalKit
+
+class Scene : Node {
+    override init() {
+        super.init()
+        buildScene()
+    }
+    
+    func buildScene () {
+        
+    }
+}

@@ -6,4 +6,10 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
-import Foundation
+import MetalKit
+
+protocol Renderable {
+    func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder)
+}
+
+

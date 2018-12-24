@@ -8,17 +8,13 @@
 
 import simd
 
-protocol sizeable {
-    static func size(_ count: Int)->Int
-    static func stride(_ count: Int)->Int
-}
-
+protocol sizeable {}
 extension sizeable {
-    static func size()->Int {
+    static var size: Int {
         return MemoryLayout<Self>.size
     }
 
-    static func stride()->Int {
+    static var stride: Int {
         return MemoryLayout<Self>.stride
     }
 
@@ -31,10 +27,15 @@ extension sizeable {
     }
 }
 
+extension Float: sizeable {}
 extension float3: sizeable {}
 extension float4: sizeable {}
 
 struct Vertex: sizeable {
     var position: float3
     var color: float4
+}
+
+struct ModelConstants : sizeable {
+    var modelMatrix = matrix_identity_float4x4
 }
