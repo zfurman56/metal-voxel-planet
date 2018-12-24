@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		9221170621D0B99E00D4D86D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221170521D0B99E00D4D86D /* AppDelegate.swift */; };
-		9221170821D0B99E00D4D86D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221170721D0B99E00D4D86D /* ViewController.swift */; };
 		9221170B21D0B99E00D4D86D /* Metal_Engine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9221170921D0B99E00D4D86D /* Metal_Engine.xcdatamodeld */; };
 		9221170D21D0B99F00D4D86D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221170C21D0B99F00D4D86D /* Assets.xcassets */; };
 		9221171021D0B99F00D4D86D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9221170E21D0B99F00D4D86D /* Main.storyboard */; };
 		9221171C21D0B99F00D4D86D /* Metal_EngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221171B21D0B99F00D4D86D /* Metal_EngineTests.swift */; };
 		9221172721D0B99F00D4D86D /* Metal_EngineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221172621D0B99F00D4D86D /* Metal_EngineUITests.swift */; };
+		9221173621D0BD7F00D4D86D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221173521D0BD7F00D4D86D /* GameView.swift */; };
+		9221173821D0C59300D4D86D /* MyShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9221173721D0C59300D4D86D /* MyShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 /* Begin PBXFileReference section */
 		9221170221D0B99E00D4D86D /* Metal-Engine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metal-Engine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9221170521D0B99E00D4D86D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9221170721D0B99E00D4D86D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9221170A21D0B99E00D4D86D /* Metal_Engine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Metal_Engine.xcdatamodel; sourceTree = "<group>"; };
 		9221170C21D0B99F00D4D86D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9221170F21D0B99F00D4D86D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,6 +48,8 @@
 		9221172221D0B99F00D4D86D /* Metal-EngineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Metal-EngineUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9221172621D0B99F00D4D86D /* Metal_EngineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal_EngineUITests.swift; sourceTree = "<group>"; };
 		9221172821D0B99F00D4D86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9221173521D0BD7F00D4D86D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		9221173721D0C59300D4D86D /* MyShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MyShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,13 +100,10 @@
 		9221170421D0B99E00D4D86D /* Metal-Engine */ = {
 			isa = PBXGroup;
 			children = (
-				9221170521D0B99E00D4D86D /* AppDelegate.swift */,
-				9221170721D0B99E00D4D86D /* ViewController.swift */,
-				9221170C21D0B99F00D4D86D /* Assets.xcassets */,
 				9221170E21D0B99F00D4D86D /* Main.storyboard */,
-				9221171121D0B99F00D4D86D /* Info.plist */,
-				9221171221D0B99F00D4D86D /* Metal_Engine.entitlements */,
-				9221170921D0B99E00D4D86D /* Metal_Engine.xcdatamodeld */,
+				9221173521D0BD7F00D4D86D /* GameView.swift */,
+				9221173721D0C59300D4D86D /* MyShaders.metal */,
+				9221173421D0BBF800D4D86D /* Other Files */,
 			);
 			path = "Metal-Engine";
 			sourceTree = "<group>";
@@ -125,6 +124,18 @@
 				9221172821D0B99F00D4D86D /* Info.plist */,
 			);
 			path = "Metal-EngineUITests";
+			sourceTree = "<group>";
+		};
+		9221173421D0BBF800D4D86D /* Other Files */ = {
+			isa = PBXGroup;
+			children = (
+				9221170521D0B99E00D4D86D /* AppDelegate.swift */,
+				9221170C21D0B99F00D4D86D /* Assets.xcassets */,
+				9221171121D0B99F00D4D86D /* Info.plist */,
+				9221171221D0B99F00D4D86D /* Metal_Engine.entitlements */,
+				9221170921D0B99E00D4D86D /* Metal_Engine.xcdatamodeld */,
+			);
+			path = "Other Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,8 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9221173821D0C59300D4D86D /* MyShaders.metal in Sources */,
 				9221170B21D0B99E00D4D86D /* Metal_Engine.xcdatamodeld in Sources */,
-				9221170821D0B99E00D4D86D /* ViewController.swift in Sources */,
+				9221173621D0BD7F00D4D86D /* GameView.swift in Sources */,
 				9221170621D0B99E00D4D86D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,10 +431,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Metal-Engine/Metal_Engine.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Metal-Engine/Other Files/Metal_Engine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Metal-Engine/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Metal-Engine/Other Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "zach.Metal-Engine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,10 +446,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Metal-Engine/Metal_Engine.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Metal-Engine/Other Files/Metal_Engine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Metal-Engine/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Metal-Engine/Other Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "zach.Metal-Engine";
 				PRODUCT_NAME = "$(TARGET_NAME)";
