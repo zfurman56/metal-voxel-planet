@@ -12,7 +12,7 @@ enum SceneTypes{
     case Sandbox
 }
 
-class SceneManager{
+class SceneManager {
     
     private static var _currentScene: Scene!
     
@@ -30,6 +30,7 @@ class SceneManager{
     public static func TickScene(renderCommandEncoder: MTLRenderCommandEncoder, deltaTime: Float) {
         _currentScene.update(deltaTime: deltaTime)
         _currentScene.render(renderCommandEncoder: renderCommandEncoder)
+    }
         
 }
 
