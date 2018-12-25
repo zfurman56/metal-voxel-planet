@@ -14,19 +14,13 @@ class GameObject : Node {
     
     var mesh: Mesh!
     
-    init(meshType: MeshTypes) {
+    init(meshType: PrefabTypes) {
         mesh = MeshLibrary.Mesh(meshType)
     }
     
     var time: Float = 0
     override func update(deltaTime: Float) {
         time += deltaTime
-        
-        self.position.x = cos(time)
-        self.position.y = sin(time)
-        self.scale = 0.5*float3(cos(0.125*time))
-        self.rotation.z = -time
-        
         updateModelConstants()
     }
     
@@ -36,11 +30,18 @@ class GameObject : Node {
 
 }
 
+// Tell the command encoder how to render GameObjects
 extension GameObject: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setVertexBytes(&modelConstants, length: ModelConstants.stride, index: 1)
         renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.PipelineState(.Basic))
+        renderCommandEncoder.setDepthStencilState(DepthStencilStateLibrary.DepthStencilState(.Less))
+        
+        // Vertex shader
+        renderCommandEncoder.setVertexBytes(&modelConstants, length: ModelConstants.stride, index: 2)
         renderCommandEncoder.setVertexBuffer(mesh.vertexBuffer, offset: 0, index: 0)
+        
+        // Fragement shader
+        
         renderCommandEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: mesh.vertexCount)
     }
 }

@@ -6,4 +6,8 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
-import Foundation
+class Cube : GameObject {
+    init() {
+        super.init(meshType: .CubePrefab)
+    }
+}

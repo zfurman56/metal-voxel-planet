@@ -8,9 +8,8 @@
 
 import MetalKit
 
-enum MeshTypes {
-    case Triangle_Custom
-    case Quad_Custom
+enum PrefabTypes {
+    case CubePrefab
 }
 
 protocol Mesh {
@@ -18,7 +17,7 @@ protocol Mesh {
     var vertexCount: Int! { get }
 }
 
-class CustomMesh: Mesh {
+class Prefab: Mesh {
     var vertices: [Vertex]!
     var vertexBuffer: MTLBuffer!
     var vertexCount: Int! {
@@ -37,43 +36,72 @@ class CustomMesh: Mesh {
     }
 }
 
-class Triangle_CustomMesh : CustomMesh {
+class Cube_Prefab: Prefab {
     override func createVertices() {
         vertices = [
-            Vertex(position: float3( 0,  1, 0), color: float4(1,0,0,1)),
-            Vertex(position: float3(-1, -1, 0), color: float4(0,1,0,1)),
-            Vertex(position: float3( 1, -1, 0), color: float4(0,0,1,1))
-        ]
-    }
-}
-
-class Quad_CustomMesh: CustomMesh {
-    override func createVertices() {
-        vertices = [
-            Vertex(position: float3( 1.0, 1.0,0), color: float4(1,0,0,1)), //Top Right
-            Vertex(position: float3(-1.0, 1.0,0), color: float4(0,1,0,1)), //Top Left
-            Vertex(position: float3(-1.0,-1.0,0), color: float4(0,0,1,1)),  //Bottom Left
+            //Left
+            Vertex(position: float3(-1.0,-1.0,-1.0), color: float4(1.0, 0.5, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0, 1.0), color: float4(0.0, 1.0, 0.5, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0, 1.0), color: float4(0.0, 0.5, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0,-1.0), color: float4(1.0, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0, 1.0), color: float4(0.0, 1.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0,-1.0), color: float4(1.0, 0.0, 1.0, 1.0), texel: float2(0, 0)),
             
-            Vertex(position: float3( 1.0, 1.0,0), color: float4(1,0,0,1)), //Top Right
-            Vertex(position: float3(-1.0,-1.0,0), color: float4(0,0,1,1)), //Bottom Left
-            Vertex(position: float3( 1.0,-1.0,0), color: float4(1,0,1,1))  //Bottom Right
+            //RIGHT
+            Vertex(position: float3( 1.0, 1.0, 1.0), color: float4(1.0, 0.0, 0.5, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0,-1.0), color: float4(0.0, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0, 1.0,-1.0), color: float4(0.0, 0.5, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0,-1.0), color: float4(1.0, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0, 1.0, 1.0), color: float4(0.0, 1.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0, 1.0), color: float4(1.0, 0.5, 1.0, 1.0), texel: float2(0, 0)),
+            
+            //TOP
+            Vertex(position: float3( 1.0, 1.0, 1.0), color: float4(1.0, 0.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0, 1.0,-1.0), color: float4(0.0, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0,-1.0), color: float4(0.0, 0.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0, 1.0, 1.0), color: float4(1.0, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0,-1.0), color: float4(0.5, 1.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0, 1.0), color: float4(1.0, 0.0, 1.0, 1.0), texel: float2(0, 0)),
+            
+            //BOTTOM
+            Vertex(position: float3( 1.0,-1.0, 1.0), color: float4(1.0, 0.5, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0,-1.0), color: float4(0.5, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0,-1.0), color: float4(0.0, 0.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0, 1.0), color: float4(1.0, 1.0, 0.5, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0, 1.0), color: float4(0.0, 1.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0,-1.0), color: float4(1.0, 0.5, 1.0, 1.0), texel: float2(0, 0)),
+            
+            //BACK
+            Vertex(position: float3( 1.0, 1.0,-1.0), color: float4(1.0, 0.5, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0,-1.0), color: float4(0.5, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0,-1.0), color: float4(0.0, 0.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0, 1.0,-1.0), color: float4(1.0, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0,-1.0), color: float4(0.0, 1.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0,-1.0), color: float4(1.0, 0.5, 1.0, 1.0), texel: float2(0, 0)),
+            
+            //FRONT
+            Vertex(position: float3(-1.0, 1.0, 1.0), color: float4(1.0, 0.5, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0,-1.0, 1.0), color: float4(0.0, 1.0, 0.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0, 1.0), color: float4(0.5, 0.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0, 1.0, 1.0), color: float4(1.0, 1.0, 0.5, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3(-1.0, 1.0, 1.0), color: float4(0.0, 1.0, 1.0, 1.0), texel: float2(0, 0)),
+            Vertex(position: float3( 1.0,-1.0, 1.0), color: float4(1.0, 0.0, 1.0, 1.0), texel: float2(0, 0))
         ]
     }
 }
 
 class MeshLibrary {
-    private static var meshes: [MeshTypes: Mesh] = [:]
+    private static var meshes: [PrefabTypes: Mesh] = [:]
     
     public static func Initialize() {
         createDefaultMeshes()
     }
     
     private static func createDefaultMeshes(){
-        meshes.updateValue(Triangle_CustomMesh(), forKey: .Triangle_Custom)
-        meshes.updateValue(Quad_CustomMesh(), forKey: .Quad_Custom)
+        meshes.updateValue(Cube_Prefab(), forKey: .CubePrefab)
     }
     
-    public static func Mesh(_ meshType: MeshTypes)->Mesh{
+    public static func Mesh(_ meshType: PrefabTypes)->Mesh{
         return meshes[meshType]!
     }
 }

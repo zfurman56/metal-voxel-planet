@@ -18,8 +18,10 @@ class Engine {
         
         ShaderLibrary.Initialize()
         VertexDescriptorLibrary.Intialize()
+        DepthStencilStateLibrary.Intitialize()
         RenderPipelineDescriptorLibrary.Initialize()
         RenderPipelineStateLibrary.Initialize()
         MeshLibrary.Initialize()
+        SceneManager.Initialize(Preferences.StartingScene)
     }
 }
