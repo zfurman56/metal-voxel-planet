@@ -15,7 +15,7 @@ enum SceneTypes{
 // Global singleton, manages scene selection and scene updates
 class SceneManager {
     
-    private static var _currentScene: Scene!
+    public static var currentScene: Scene!
     
     public static func Initialize(_ sceneType: SceneTypes) {
         SetScene(sceneType)
@@ -24,14 +24,14 @@ class SceneManager {
     public static func SetScene(_ sceneType: SceneTypes) {
         switch sceneType {
         case .Sandbox:
-            _currentScene = SandboxScene()
+            currentScene = SandboxScene()
         }
     }
     
     public static func TickScene(renderCommandEncoder: MTLRenderCommandEncoder, deltaTime: Float) {
-        _currentScene.updateCameras(deltaTime: deltaTime)
-        _currentScene.update(deltaTime: deltaTime)
-        _currentScene.render(renderCommandEncoder: renderCommandEncoder)
+        currentScene.updateCameras(deltaTime: deltaTime)
+        currentScene.update(deltaTime: deltaTime)
+        currentScene.render(renderCommandEncoder: renderCommandEncoder)
     }
         
 }

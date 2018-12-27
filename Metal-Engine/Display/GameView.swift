@@ -39,6 +39,10 @@ extension GameView {
     override func keyUp(with event: NSEvent) {
         Keyboard.SetKeyPressed(event.keyCode, isOn: false)
     }
+    
+    override func flagsChanged(with event: NSEvent) {
+        Keyboard.SetKeyPressed(event.keyCode, isOn: !Keyboard.IsKeyPressed(KeyCodes(rawValue: event.keyCode)!))
+    }
 }
 
 // Mouse Clicks

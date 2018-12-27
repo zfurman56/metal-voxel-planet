@@ -13,6 +13,7 @@ class Scene : Node {
     
     var cameraManager = CameraManager()
     var sceneConstants = SceneConstants()
+    var light: Light! // override this!
 
     override init() {
         super.init()
@@ -20,7 +21,6 @@ class Scene : Node {
     }
     
     func buildScene () {
-        
     }
     
     func addCamera(_ camera: Camera, isCurrentCamera: Bool = true) {
@@ -47,7 +47,7 @@ class Scene : Node {
     }
     
     override func render(renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setVertexBytes(&sceneConstants, length: SceneConstants.stride, index: 1)
+        renderCommandEncoder.setFragmentBytes(&light, length: Light.stride, index: 3)
         super.render(renderCommandEncoder: renderCommandEncoder)
     }
 }

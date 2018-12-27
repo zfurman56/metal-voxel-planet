@@ -12,39 +12,56 @@ using namespace metal;
 struct VertexIn {
     float3 position [[ attribute(0) ]];
     float4 color [[ attribute(1) ]];
+    float2 texel [[ attribute(2) ]];
+    float3 normals [[ attribute(3) ]];
 };
 
 struct RasterizerData {
     float4 position [[position]];
     float4 color;
+    float2 texel;
+    float3 normals;
 };
 
-struct ModelConstants {
-    float4x4 modelMatrix;
+struct Light{
+    float3 color;
+    float3 direction;
+    float ambientIntensity;
+    float diffuseIntensity;
 };
 
-struct SceneConstants {
-    float4x4 viewMatrix;
-    float4x4 projectionMatrix;
+struct Uniforms {
+    float4x4 modelViewProjectionMatrix;
+    float3x3 normalMatrix;
 };
-
-constexpr sampler s(coord::normalized,
-                    address::repeat,
-                    filter::linear);
 
 vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
-                                          constant SceneConstants &sceneConstants [[ buffer(1) ]],
-                                          constant ModelConstants &modelConstants [[ buffer(2) ]]) {
+                                          constant Uniforms &uniforms [[ buffer(1) ]]) {
     
     RasterizerData rd;
-    rd.position = sceneConstants.projectionMatrix * sceneConstants.viewMatrix * modelConstants.modelMatrix * float4(vIn.position, 1);
+    rd.position = uniforms.modelViewProjectionMatrix * float4(vIn.position, 1);
     rd.color = vIn.color;
+    rd.texel = vIn.texel;
+    rd.normals = uniforms.normalMatrix*vIn.normals;
 
     return rd;
 }
 
-fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]]) {
+fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
+                                     constant Light &light [[ buffer(3) ]],
+                                     texture2d<float> texture [[ texture(0) ]]) {
+
+    constexpr sampler textureSampler (mag_filter::linear,
+                                      min_filter::nearest,
+                                      mip_filter::linear);
     
-    float4 color = rd.color;
-    return half4(color.r, color.g, color.b, color.a);
+    float4 textureColor = texture.sample(textureSampler, rd.texel);
+
+    float4 ambientColor = float4(light.color * light.ambientIntensity, 1);
+
+    float diffuseFactor = max(0.0, dot(rd.normals, light.direction)); // 1
+    float4 diffuseColor = float4(light.color * light.diffuseIntensity * diffuseFactor, 1.0);
+
+    float4 color = textureColor * (ambientColor + diffuseColor);
+    return half4(color.r, color.g, color.b, 1);
 }

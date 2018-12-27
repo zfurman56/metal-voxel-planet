@@ -22,6 +22,7 @@ class Engine {
         RenderPipelineDescriptorLibrary.Initialize()
         RenderPipelineStateLibrary.Initialize()
         MeshLibrary.Initialize()
+        TextureLibrary.Initialize(device: device)
         SceneManager.Initialize(Preferences.StartingScene)
     }
 }

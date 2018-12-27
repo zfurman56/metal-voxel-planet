@@ -46,12 +46,22 @@ public struct Basic_VertexDescriptor: VertexDescriptor{
         //Position
         vertexDescriptor.attributes[0].format = .float3
         vertexDescriptor.attributes[0].bufferIndex = 0
-        vertexDescriptor.attributes[0].offset = 0
+        vertexDescriptor.attributes[0].offset = Vertex.memOffset(of: \Vertex.position)
         
         //Color
         vertexDescriptor.attributes[1].format = .float4
         vertexDescriptor.attributes[1].bufferIndex = 0
-        vertexDescriptor.attributes[1].offset = float3.size
+        vertexDescriptor.attributes[1].offset = Vertex.memOffset(of: \Vertex.color)
+        
+        // Texel
+        vertexDescriptor.attributes[2].format = .float2
+        vertexDescriptor.attributes[2].bufferIndex = 0
+        vertexDescriptor.attributes[2].offset = Vertex.memOffset(of: \Vertex.texel)
+        
+        // Normals
+        vertexDescriptor.attributes[3].format = .float3
+        vertexDescriptor.attributes[3].bufferIndex = 0
+        vertexDescriptor.attributes[3].offset = Vertex.memOffset(of: \Vertex.normals)
         
         vertexDescriptor.layouts[0].stride = Vertex.stride
     }
