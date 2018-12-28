@@ -8,24 +8,24 @@
 
 import MetalKit
 
-enum VertexDescriptorTypes {
+enum VertexDescriptorTypes : Int {
     case Basic
 }
 
 class VertexDescriptorLibrary {
     
-    private static var vertexDescriptors: [VertexDescriptorTypes: VertexDescriptor] = [:]
+    private static var vertexDescriptors: [VertexDescriptor] = []
     
     public static func Intialize() {
         createDefaultVertexDescriptors()
     }
     
     private static func createDefaultVertexDescriptors() {
-        vertexDescriptors.updateValue(Basic_VertexDescriptor(), forKey: .Basic)
+        vertexDescriptors.insert(Basic_VertexDescriptor(), at: VertexDescriptorTypes.Basic.rawValue)
     }
     
     public static func Descriptor(_ vertexDescriptorType: VertexDescriptorTypes)->MTLVertexDescriptor{
-        return vertexDescriptors[vertexDescriptorType]!.vertexDescriptor
+        return vertexDescriptors[vertexDescriptorType.rawValue].vertexDescriptor
     }
     
 }
@@ -36,7 +36,7 @@ protocol VertexDescriptor {
 }
 
 
-public struct Basic_VertexDescriptor: VertexDescriptor{
+public class Basic_VertexDescriptor: VertexDescriptor{
     var name: String = "Basic Vertex Descriptor"
     
     var vertexDescriptor: MTLVertexDescriptor!
@@ -48,20 +48,15 @@ public struct Basic_VertexDescriptor: VertexDescriptor{
         vertexDescriptor.attributes[0].bufferIndex = 0
         vertexDescriptor.attributes[0].offset = Vertex.memOffset(of: \Vertex.position)
         
-        //Color
-        vertexDescriptor.attributes[1].format = .float4
-        vertexDescriptor.attributes[1].bufferIndex = 0
-        vertexDescriptor.attributes[1].offset = Vertex.memOffset(of: \Vertex.color)
-        
         // Texel
-        vertexDescriptor.attributes[2].format = .float2
-        vertexDescriptor.attributes[2].bufferIndex = 0
-        vertexDescriptor.attributes[2].offset = Vertex.memOffset(of: \Vertex.texel)
+        vertexDescriptor.attributes[1].format = .float2
+        vertexDescriptor.attributes[1].bufferIndex = 0
+        vertexDescriptor.attributes[1].offset = Vertex.memOffset(of: \Vertex.texel)
         
         // Normals
-        vertexDescriptor.attributes[3].format = .float3
-        vertexDescriptor.attributes[3].bufferIndex = 0
-        vertexDescriptor.attributes[3].offset = Vertex.memOffset(of: \Vertex.normals)
+        vertexDescriptor.attributes[2].format = .float3
+        vertexDescriptor.attributes[2].bufferIndex = 0
+        vertexDescriptor.attributes[2].offset = Vertex.memOffset(of: \Vertex.normals)
         
         vertexDescriptor.layouts[0].stride = Vertex.stride
     }

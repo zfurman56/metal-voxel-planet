@@ -8,19 +8,19 @@
 
 import MetalKit
 
-enum VertexShaderTypes {
+enum VertexShaderTypes : Int {
     case Basic
 }
 
-enum FragmentShaderTypes {
+enum FragmentShaderTypes : Int {
     case Basic
 }
 
 class ShaderLibrary {
     public static var DefaultLibrary: MTLLibrary!
     
-    private static var vertexShaders: [VertexShaderTypes: Shader] = [:]
-    private static var fragmentShaders: [FragmentShaderTypes: Shader] = [:]
+    private static var vertexShaders: [Shader] = []
+    private static var fragmentShaders: [Shader] = []
     
     public static func Initialize() {
         DefaultLibrary = Engine.Device.makeDefaultLibrary()
@@ -28,16 +28,16 @@ class ShaderLibrary {
     }
     
     private static func createDefaultShaders() {
-        vertexShaders.updateValue(Basic_VertexShader(), forKey: .Basic)
-        fragmentShaders.updateValue(Basic_FragmentShader(), forKey: .Basic)
+        vertexShaders.insert(Basic_VertexShader(), at: VertexShaderTypes.Basic.rawValue)
+        fragmentShaders.insert(Basic_FragmentShader(), at: FragmentShaderTypes.Basic.rawValue)
     }
     
     public static func Vertex(_ vertexShaderType: VertexShaderTypes)->MTLFunction {
-        return vertexShaders[vertexShaderType]!.function
+        return vertexShaders[vertexShaderType.rawValue].function
     }
     
     public static func Fragment(_ fragmentShaderType: FragmentShaderTypes)->MTLFunction {
-        return fragmentShaders[fragmentShaderType]!.function
+        return fragmentShaders[fragmentShaderType.rawValue].function
     }
     
 }
@@ -48,7 +48,7 @@ protocol Shader {
     var function: MTLFunction! { get }
 }
 
-public struct Basic_VertexShader: Shader {
+public class Basic_VertexShader: Shader {
     public var name: String = "Basic Vertex Shader"
     public var functionName: String = "basic_vertex_shader"
     public var function: MTLFunction!
@@ -58,7 +58,7 @@ public struct Basic_VertexShader: Shader {
     }
 }
 
-public struct Basic_FragmentShader: Shader {
+public class Basic_FragmentShader: Shader {
     public var name: String = "Basic Fragment Shader"
     public var functionName: String = "basic_fragment_shader"
     public var function: MTLFunction!

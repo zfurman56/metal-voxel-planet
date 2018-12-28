@@ -8,24 +8,24 @@
 
 import MetalKit
 
-enum DepthStencilStateTypes {
+enum DepthStencilStateTypes : Int {
     case Less
 }
 
 class DepthStencilStateLibrary {
     
-    private static var _depthStencilStates: [DepthStencilStateTypes: DepthStencilState] = [:]
+    private static var _depthStencilStates: [DepthStencilState] = []
     
     public static func Intitialize(){
         createDefaultDepthStencilStates()
     }
     
     private static func createDefaultDepthStencilStates(){
-        _depthStencilStates.updateValue(Less_DepthStencilState(), forKey: .Less)
+        _depthStencilStates.insert(Less_DepthStencilState(), at: DepthStencilStateTypes.Less.rawValue)
     }
     
     public static func DepthStencilState(_ depthStencilStateType: DepthStencilStateTypes)->MTLDepthStencilState{
-        return _depthStencilStates[depthStencilStateType]!.depthStencilState
+        return _depthStencilStates[depthStencilStateType.rawValue].depthStencilState
     }
     
 }

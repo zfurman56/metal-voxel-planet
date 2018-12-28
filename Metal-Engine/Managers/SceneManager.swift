@@ -9,7 +9,7 @@
 import MetalKit
 
 enum SceneTypes{
-    case Sandbox
+    case Surface
 }
 
 // Global singleton, manages scene selection and scene updates
@@ -23,15 +23,15 @@ class SceneManager {
     
     public static func SetScene(_ sceneType: SceneTypes) {
         switch sceneType {
-        case .Sandbox:
-            currentScene = SandboxScene()
+        case .Surface:
+            currentScene = SurfaceScene()
         }
     }
     
     public static func TickScene(renderCommandEncoder: MTLRenderCommandEncoder, deltaTime: Float) {
+        currentScene.render(renderCommandEncoder: renderCommandEncoder)
         currentScene.updateCameras(deltaTime: deltaTime)
         currentScene.update(deltaTime: deltaTime)
-        currentScene.render(renderCommandEncoder: renderCommandEncoder)
     }
         
 }

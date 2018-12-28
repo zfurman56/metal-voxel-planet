@@ -10,7 +10,6 @@ import MetalKit
 
 class GameObject : Node {
     
-    var modelConstants = ModelConstants()
     var uniforms = Uniforms()
     var mesh: Mesh!
     
@@ -21,11 +20,12 @@ class GameObject : Node {
     var time: Float = 0
     override func update(deltaTime: Float) {
         time += deltaTime
-        updateModelConstants()
+        updateUniforms()
     }
     
-    private func updateModelConstants() {
-        modelConstants.modelMatrix = self.modelMatrix
+    private func updateUniforms() {
+        uniforms.modelViewProjectionMatrix = SceneManager.currentScene.cameraManager.currentCamera.projectionMatrix * SceneManager.currentScene.cameraManager.currentCamera.viewMatrix * self.modelMatrix
+        uniforms.normalMatrix = self.normalMatrix
     }
 
 }
@@ -35,12 +35,9 @@ extension GameObject: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
         renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.PipelineState(.Basic))
         renderCommandEncoder.setDepthStencilState(DepthStencilStateLibrary.DepthStencilState(.Less))
+        renderCommandEncoder.setCullMode(MTLCullMode.front)
         
         // Vertex shader
-        let modelViewMatrix = SceneManager.currentScene.cameraManager.currentCamera.viewMatrix * self.modelConstants.modelMatrix
-        let normalMatrix: float3x3 = float3x3(float3(Array((self.modelConstants.modelMatrix.columns.0)[0..<3])), float3(Array((self.modelConstants.modelMatrix.columns.1)[0..<3])), float3(Array((self.modelConstants.modelMatrix.columns.2)[0..<3])))
-        uniforms.normalMatrix = normalMatrix.inverse.transpose
-        uniforms.modelViewProjectionMatrix =  SceneManager.currentScene.cameraManager.currentCamera.projectionMatrix * modelViewMatrix
         renderCommandEncoder.setVertexBytes(&uniforms, length: Uniforms.stride, index: 1)
         renderCommandEncoder.setVertexBuffer(mesh.vertexBuffer, offset: 0, index: 0)
         

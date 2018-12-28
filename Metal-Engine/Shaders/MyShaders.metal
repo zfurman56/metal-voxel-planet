@@ -11,14 +11,12 @@ using namespace metal;
 
 struct VertexIn {
     float3 position [[ attribute(0) ]];
-    float4 color [[ attribute(1) ]];
-    float2 texel [[ attribute(2) ]];
-    float3 normals [[ attribute(3) ]];
+    float2 texel [[ attribute(1) ]];
+    float3 normals [[ attribute(2) ]];
 };
 
 struct RasterizerData {
     float4 position [[position]];
-    float4 color;
     float2 texel;
     float3 normals;
 };
@@ -40,7 +38,6 @@ vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
     
     RasterizerData rd;
     rd.position = uniforms.modelViewProjectionMatrix * float4(vIn.position, 1);
-    rd.color = vIn.color;
     rd.texel = vIn.texel;
     rd.normals = uniforms.normalMatrix*vIn.normals;
 
@@ -51,9 +48,9 @@ fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
                                      constant Light &light [[ buffer(3) ]],
                                      texture2d<float> texture [[ texture(0) ]]) {
 
-    constexpr sampler textureSampler (mag_filter::linear,
+    constexpr sampler textureSampler (mag_filter::nearest,
                                       min_filter::nearest,
-                                      mip_filter::linear);
+                                      mip_filter::nearest);
     
     float4 textureColor = texture.sample(textureSampler, rd.texel);
 

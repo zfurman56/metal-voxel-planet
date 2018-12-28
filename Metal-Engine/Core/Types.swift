@@ -31,6 +31,12 @@ extension sizeable {
     }
 }
 
+extension Collection where Indices.Iterator.Element == Index {
+    subscript (safe index: Index) -> Iterator.Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
 extension Float: sizeable {}
 extension float2: sizeable {}
 extension float3: sizeable {}
@@ -38,7 +44,6 @@ extension float4: sizeable {}
 
 struct Vertex: sizeable {
     var position: float3
-    var color: float4
     var texel: float2
     var normals: float3
 }

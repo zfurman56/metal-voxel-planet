@@ -8,7 +8,7 @@
 
 import MetalKit
 
-enum TextureTypes {
+enum TextureTypes : Int {
     case Dirt
 }
 
@@ -19,15 +19,15 @@ class Texture {
         let textureLoader = MTKTextureLoader(device: device)
         do {
             try texture = textureLoader.newTexture(URL: filename, options: [.generateMipmaps: true, .allocateMipmaps: true])
-        } catch {
-            print("Error loading texture!")
+        } catch let error as NSError {
+            print("Error loading texture!::\(error)")
             return
         }
     }
 }
 
 class TextureLibrary {
-    private static var textures: [TextureTypes: Texture] = [:]
+    private static var textures: [Texture] = []
     
     public static func Initialize(device: MTLDevice) {
         createDefaultTextures(device: device)
@@ -35,12 +35,12 @@ class TextureLibrary {
     
     private static func createDefaultTextures(device: MTLDevice){
         var path: URL!
-            
-        path = Bundle.main.url(forResource: "grass", withExtension: "jpg")
-        textures.updateValue(Texture(device: device, filename: path), forKey: .Dirt)
+        
+        path = Bundle.main.url(forResource: "dirt", withExtension: "png")
+        textures.insert(Texture(device: device, filename: path), at: TextureTypes.Dirt.rawValue)
     }
     
     public static func getTexture(_ textureType: TextureTypes)->Texture{
-        return textures[textureType]!
+        return textures[textureType.rawValue]
     }
 }

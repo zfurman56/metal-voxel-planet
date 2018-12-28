@@ -9,26 +9,24 @@
 
 import MetalKit
 
-enum RenderPipelineStateTypes {
+enum RenderPipelineStateTypes : Int {
     case Basic
 }
 
 class RenderPipelineStateLibrary {
     
-    private static var renderPipelineStates: [RenderPipelineStateTypes: RenderPipelineState] = [:]
+    private static var renderPipelineStates: [RenderPipelineState] = []
     
     public static func Initialize(){
         createDefaultRenderPipelineStates()
     }
     
     private static func createDefaultRenderPipelineStates(){
-        
-        renderPipelineStates.updateValue(Basic_RenderPipelineState(), forKey: .Basic)
-        
+        renderPipelineStates.insert(Basic_RenderPipelineState(), at: RenderPipelineStateTypes.Basic.rawValue)
     }
     
     public static func PipelineState(_ renderPipelineStateType: RenderPipelineStateTypes)->MTLRenderPipelineState{
-        return (renderPipelineStates[renderPipelineStateType]?.renderPipelineState)!
+        return (renderPipelineStates[renderPipelineStateType.rawValue].renderPipelineState)!
     }
     
 }
@@ -38,7 +36,7 @@ protocol RenderPipelineState {
     var renderPipelineState: MTLRenderPipelineState! { get }
 }
 
-public struct Basic_RenderPipelineState: RenderPipelineState {
+public class Basic_RenderPipelineState: RenderPipelineState {
     var name: String = "Basic Render Pipeline State"
     var renderPipelineState: MTLRenderPipelineState!
     init() {

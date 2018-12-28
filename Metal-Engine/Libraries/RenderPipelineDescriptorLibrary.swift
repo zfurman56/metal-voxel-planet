@@ -8,23 +8,23 @@
 
 import MetalKit
 
-enum RenderPipelineDescriptorTypes {
+enum RenderPipelineDescriptorTypes : Int {
     case Basic
 }
 
 class RenderPipelineDescriptorLibrary {
-    private static var renderPipelineDescriptors: [RenderPipelineDescriptorTypes : RenderPipelineDescriptor] = [:]
+    private static var renderPipelineDescriptors: [RenderPipelineDescriptor] = []
 
     public static func Initialize() {
         createDefaultRenderPipelineDescriptors()
     }
 
     private static func createDefaultRenderPipelineDescriptors() {
-        renderPipelineDescriptors.updateValue(Basic_RenderPipelineDescriptor(), forKey: .Basic)
+        renderPipelineDescriptors.insert(Basic_RenderPipelineDescriptor(), at: RenderPipelineDescriptorTypes.Basic.rawValue)
     }
 
     public static func Descriptor(_ renderPipelineDescriptorType: RenderPipelineDescriptorTypes)->MTLRenderPipelineDescriptor {
-        return renderPipelineDescriptors[renderPipelineDescriptorType]!.renderPipelineDescriptor
+        return renderPipelineDescriptors[renderPipelineDescriptorType.rawValue].renderPipelineDescriptor
     }
 }
 
@@ -33,7 +33,7 @@ protocol RenderPipelineDescriptor {
     var renderPipelineDescriptor: MTLRenderPipelineDescriptor! { get }
 }
 
-public struct Basic_RenderPipelineDescriptor: RenderPipelineDescriptor {
+public class Basic_RenderPipelineDescriptor: RenderPipelineDescriptor {
     var name: String = "Basic Render Pipeline Descriptor"
     var renderPipelineDescriptor: MTLRenderPipelineDescriptor!
     init() {
