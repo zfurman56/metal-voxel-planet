@@ -17,6 +17,11 @@ protocol Mesh {
     var vertexCount: Int! { get }
 }
 
+protocol SafeMesh {
+    var vertexBuffer: MTLBuffer? { get }
+    var vertexCount: Int! { get }
+}
+
 class Prefab: Mesh {
     var vertices: [Vertex]!
     var vertexBuffer: MTLBuffer!

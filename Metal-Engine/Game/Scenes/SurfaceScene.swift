@@ -10,7 +10,6 @@ import simd
 
 class SurfaceScene : Scene {
     let cube = Cube()
-    let grid = VoxelGrid()
     let debugCamera = DebugCamera()
     
     override func buildScene() {
@@ -18,15 +17,18 @@ class SurfaceScene : Scene {
         addCamera(debugCamera)
         debugCamera.position.y = 18
         debugCamera.position.z = 10
-        grid.changeBlock(at: Position3D(15, 15, 15), exec: { $0.type = VoxelType.Air })
-        grid.changeBlock(at: Position3D(15, 15, 14), exec: { $0.type = VoxelType.Air })
+        for z in 0..<16 {
+            for x in 0..<16 {
+                theGrid.changeBlock(at: Position3D(x, 15, z), exec: { $0.type = VoxelType.Air })
+            }
+        }
         theTerrain.chunks[0].updateMesh()
         
         addChild(theTerrain.chunks[0])
     }
     
 //    override func update(deltaTime: Float) {
-//        terrain.chunks[0].updateMesh()
+//        theTerrain.chunks[0].updateMesh()
 //        super.update(deltaTime: deltaTime)
 //    }
 }

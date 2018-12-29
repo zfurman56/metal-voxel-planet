@@ -68,6 +68,11 @@ class VoxelGrid {
         self.chunks.updateValue(Chunk(position: Position(x:0, y:0)), forKey: Position(x:0, y:0))
     }
     
+    func getChunk(at coord: Position)->Chunk? {
+        let chunkCoord = Position(x: coord.x>>4, y: coord.y>>4)
+        return chunks[chunkCoord]
+    }
+    
     func block(at coord: Position3D)->Voxel? {
         let chunkCoord = Position(x: coord.x>>4, y: coord.z>>4)
         let blockOffset = Position3D((coord.x<<28)>>28, coord.y, (coord.z<<28)>>28)
