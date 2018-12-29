@@ -9,7 +9,6 @@
 import simd
 
 class SurfaceScene : Scene {
-    let cube = Cube()
     let debugCamera = DebugCamera()
     
     override func buildScene() {
