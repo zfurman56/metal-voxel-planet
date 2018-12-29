@@ -50,7 +50,8 @@ fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
 
     constexpr sampler textureSampler (mag_filter::nearest,
                                       min_filter::nearest,
-                                      mip_filter::nearest);
+                                      mip_filter::nearest,
+                                      address::clamp_to_edge);
     
     float4 textureColor = texture.sample(textureSampler, rd.texel);
 

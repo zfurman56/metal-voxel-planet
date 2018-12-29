@@ -19,21 +19,70 @@ enum VoxelType: UInt8 {
     case Dirt   = 1
 }
 
-struct Voxel {
+class Voxel {
     var type: VoxelType
+    init(_ type: VoxelType) {
+        self.type = type
+    }
 }
 
-struct Position {
+struct Position: Hashable {
     let x: Int
     let y: Int
 }
 
-struct Chunk {
+struct Position3D {
+    let x: Int
+    let y: Int
+    let z: Int
+    
+    init(_ x: Int, _ y:Int, _ z: Int) {
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+    
+    init(_ vec: float3) {
+        self.x = Int(vec.x)
+        self.y = Int(vec.y)
+        self.z = Int(vec.z)
+    }
+}
+
+class Chunk {
     var position: Position
     var blocks: [[[Voxel]]]
 
     init(position: Position) {
         self.position = position
-        self.blocks = [[[Voxel]]](repeating: [[Voxel]](repeating: [Voxel](repeating: Voxel(type: .Dirt), count: 16), count: 16), count: 16)
+        self.blocks = [[[Voxel]]](elementCreator: [[Voxel]](elementCreator: [Voxel](elementCreator: Voxel(.Dirt), count: 16), count: 16), count: 16)
+    }
+}
+
+
+// Internal representation of voxel grid - see VoxelTerrain for rendering
+class VoxelGrid {
+    var chunks: [Position: Chunk] = [:]
+    
+    init() {
+        self.chunks.updateValue(Chunk(position: Position(x:0, y:0)), forKey: Position(x:0, y:0))
+    }
+    
+    func block(at coord: Position3D)->Voxel? {
+        let chunkCoord = Position(x: coord.x>>4, y: coord.z>>4)
+        let blockOffset = Position3D((coord.x<<28)>>28, coord.y, (coord.z<<28)>>28)
+//        print("Coord: \(coord)")
+//        print(blockOffset)
+        let selectedChunk = chunks[chunkCoord]
+        return selectedChunk?.blocks[safe: Int(blockOffset.y)]?[safe: Int(blockOffset.z)]?[safe: Int(blockOffset.x)]
+    }
+    
+    // Closure necessary because structs are pass-by-value and do not modify
+    // the original when returned from a function
+    func changeBlock(at coord: Position3D, exec: (Voxel)->()) {
+        let chunkCoord = Position(x: coord.x>>4, y: coord.z>>4)
+        let blockOffset = Position3D((coord.x<<28)>>28, coord.y, (coord.z<<28)>>28)
+        var selectedChunk = chunks[chunkCoord]!
+        exec(selectedChunk.blocks[Int(blockOffset.y)][Int(blockOffset.z)][Int(blockOffset.x)])
     }
 }

@@ -43,6 +43,8 @@
 		929AF1BC21D5D7AB00C07564 /* SurfaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1BB21D5D7AB00C07564 /* SurfaceScene.swift */; };
 		929AF1C221D5F14600C07564 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1C121D5F14600C07564 /* CameraManager.swift */; };
 		929AF1C421D5F1FC00C07564 /* dirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 929AF1C321D5F1FC00C07564 /* dirt.png */; };
+		929AF1C621D75DF100C07564 /* VoxelRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1C521D75DF100C07564 /* VoxelRaycast.swift */; };
+		92C32D3921D76F78000F2293 /* VoxelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C32D3821D76F78000F2293 /* VoxelManager.swift */; };
 		92E967B821D0FA0600E3F338 /* Pointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E967B721D0FA0600E3F338 /* Pointer.swift */; };
 		92E967BA21D0FB0300E3F338 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E967B921D0FB0300E3F338 /* Node.swift */; };
 		92E967BD21D0FBFE00E3F338 /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E967BC21D0FBFE00E3F338 /* Renderable.swift */; };
@@ -109,6 +111,8 @@
 		929AF1BB21D5D7AB00C07564 /* SurfaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceScene.swift; sourceTree = "<group>"; };
 		929AF1C121D5F14600C07564 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		929AF1C321D5F1FC00C07564 /* dirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt.png; sourceTree = "<group>"; };
+		929AF1C521D75DF100C07564 /* VoxelRaycast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VoxelRaycast.swift; path = "/Users/zach/Documents/Scripts/3-D Graphics/Metal-Engine/Metal-Engine/Display/VoxelRaycast.swift"; sourceTree = "<absolute>"; };
+		92C32D3821D76F78000F2293 /* VoxelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxelManager.swift; sourceTree = "<group>"; };
 		92E967B721D0FA0600E3F338 /* Pointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pointer.swift; sourceTree = "<group>"; };
 		92E967B921D0FB0300E3F338 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		92E967BC21D0FBFE00E3F338 /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				926F16BB21D16E6400398F89 /* Math.swift */,
+				929AF1C521D75DF100C07564 /* VoxelRaycast.swift */,
 			);
 			path = Math;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				926F16C321D183C600398F89 /* SceneManager.swift */,
+				92C32D3821D76F78000F2293 /* VoxelManager.swift */,
 				929AF1C121D5F14600C07564 /* CameraManager.swift */,
 			);
 			path = Managers;
@@ -482,6 +488,7 @@
 				9221174821D0EB0300D4D86D /* RenderPipelineDescriptorLibrary.swift in Sources */,
 				9221174621D0E8F100D4D86D /* VertexDescriptorLibrary.swift in Sources */,
 				926F16BF21D17F1A00398F89 /* Scene.swift in Sources */,
+				929AF1C621D75DF100C07564 /* VoxelRaycast.swift in Sources */,
 				9221173821D0C59300D4D86D /* MyShaders.metal in Sources */,
 				9221174221D0DFFC00D4D86D /* Preferences.swift in Sources */,
 				9225048321D0F5E9004F9EF3 /* MeshLibrary.swift in Sources */,
@@ -505,6 +512,7 @@
 				9221173A21D0DB3300D4D86D /* Types.swift in Sources */,
 				926F16CB21D196A900398F89 /* KeyCodes.swift in Sources */,
 				9221170621D0B99E00D4D86D /* AppDelegate.swift in Sources */,
+				92C32D3921D76F78000F2293 /* VoxelManager.swift in Sources */,
 				92516CFD21D224AD00267DDD /* TextureLibrary.swift in Sources */,
 				9266D5FA21D1B3AB00CF59AD /* Camera.swift in Sources */,
 				92E967B821D0FA0600E3F338 /* Pointer.swift in Sources */,

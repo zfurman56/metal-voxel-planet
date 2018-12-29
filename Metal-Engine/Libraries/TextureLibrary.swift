@@ -36,7 +36,7 @@ class TextureLibrary {
     private static func createDefaultTextures(device: MTLDevice){
         var path: URL!
         
-        path = Bundle.main.url(forResource: "dirt", withExtension: "png")
+        path = Bundle.main.url(forResource: "grass", withExtension: "jpg")
         textures.insert(Texture(device: device, filename: path), at: TextureTypes.Dirt.rawValue)
     }
     

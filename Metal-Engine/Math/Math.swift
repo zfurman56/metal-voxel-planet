@@ -20,7 +20,7 @@ extension Float {
         return self * (180.0/Float.pi)
     }
 }
-
+ 
 extension matrix_float4x4 {
     mutating func translate(direction: float3) {
         var result = matrix_identity_float4x4

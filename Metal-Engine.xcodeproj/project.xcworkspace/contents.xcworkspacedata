@@ -2,8 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "absolute:/Users/zach/Documents/Scripts/3-D Graphics/Metal-Engine/Metal-Engine/Assets/get_rid_of_me">
+      location = "group:/Users/zach/Documents/Scripts/3-D Graphics/Metal-Engine/Metal-Engine/Display/VoxelRaycast.swift">
    </FileRef>
+   <FileRef
+      location = "container:/Users/zach/Documents/Scripts/3-D Graphics/Metal-Engine/Metal-Engine/Assets/get_rid_of_me">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "New Group">
+   </Group>
    <FileRef
       location = "self:Metal-Engine.xcodeproj">
    </FileRef>

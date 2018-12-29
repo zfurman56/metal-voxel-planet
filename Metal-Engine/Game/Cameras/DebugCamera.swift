@@ -54,6 +54,14 @@ class DebugCamera : Camera {
             isCursorLocked = true
             CGAssociateMouseAndMouseCursorPosition(boolean_t(truncating: false))
             NSCursor.hide()
+            
+            let unitVector = RotationToUnitVector(rotation: self.rotation)
+            let callback = { (coord: float3) -> Bool in return ((theGrid.block(at: Position3D(coord))?.type ?? VoxelType.Air) != VoxelType.Air) }
+            let impact = VoxelRaycast.raycast(origin: self.position, direction: unitVector, radius: 20, callback: callback)
+            if (impact != nil) {
+                theGrid.changeBlock(at: Position3D(impact!), exec: { $0.type = VoxelType.Air })
+                theTerrain.chunks[0].updateMesh()
+            }
         }
         if (Keyboard.IsKeyPressed(.escape)) {
             isCursorLocked = false
