@@ -37,7 +37,7 @@
 		926F16CB21D196A900398F89 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F16CA21D196A900398F89 /* KeyCodes.swift */; };
 		926F16CD21D1998D00398F89 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F16CC21D1998D00398F89 /* Mouse.swift */; };
 		9297274A21D4A2A2000303BB /* Voxel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297274921D4A2A2000303BB /* Voxel.swift */; };
-		929AF1BA21D5BEC500C07564 /* TerrainChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1B921D5BEC500C07564 /* TerrainChunk.swift */; };
+		929AF1BA21D5BEC500C07564 /* RenderableChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1B921D5BEC500C07564 /* RenderableChunk.swift */; };
 		929AF1BC21D5D7AB00C07564 /* SurfaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1BB21D5D7AB00C07564 /* SurfaceScene.swift */; };
 		929AF1C221D5F14600C07564 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1C121D5F14600C07564 /* CameraManager.swift */; };
 		929AF1C421D5F1FC00C07564 /* dirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 929AF1C321D5F1FC00C07564 /* dirt.png */; };
@@ -104,7 +104,7 @@
 		926F16CA21D196A900398F89 /* KeyCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCodes.swift; sourceTree = "<group>"; };
 		926F16CC21D1998D00398F89 /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
 		9297274921D4A2A2000303BB /* Voxel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voxel.swift; sourceTree = "<group>"; };
-		929AF1B921D5BEC500C07564 /* TerrainChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainChunk.swift; sourceTree = "<group>"; };
+		929AF1B921D5BEC500C07564 /* RenderableChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderableChunk.swift; sourceTree = "<group>"; };
 		929AF1BB21D5D7AB00C07564 /* SurfaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceScene.swift; sourceTree = "<group>"; };
 		929AF1C121D5F14600C07564 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		929AF1C321D5F1FC00C07564 /* dirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt.png; sourceTree = "<group>"; };
@@ -352,7 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				9264101021D0EF0200C4F5E5 /* GameObject.swift */,
-				929AF1B921D5BEC500C07564 /* TerrainChunk.swift */,
+				929AF1B921D5BEC500C07564 /* RenderableChunk.swift */,
 			);
 			path = "Game Objects";
 			sourceTree = "<group>";
@@ -526,7 +526,7 @@
 				92C32D3921D76F78000F2293 /* VoxelManager.swift in Sources */,
 				92516CFD21D224AD00267DDD /* TextureLibrary.swift in Sources */,
 				9266D5FA21D1B3AB00CF59AD /* Camera.swift in Sources */,
-				929AF1BA21D5BEC500C07564 /* TerrainChunk.swift in Sources */,
+				929AF1BA21D5BEC500C07564 /* RenderableChunk.swift in Sources */,
 				9221174A21D0EBE600D4D86D /* RenderPipelineStateLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
