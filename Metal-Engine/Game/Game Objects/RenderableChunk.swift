@@ -31,7 +31,7 @@ enum CubeFaceType {
     case Front
 }
 
-class TerrainChunk : Node {
+class RenderableChunk : Node {
     var uniforms: Uniforms = Uniforms()
     var mesh: TerrainMesh
     var gridPosition: Position
@@ -49,37 +49,6 @@ class TerrainChunk : Node {
     
     public func updateMesh() {
         var vertices: [Vertex] = []
-        
-//        for y in 0..<16 {
-//            for z in 0..<16 {
-//                for x in 0..<16 {
-//                    let blockType = voxelManager.grid.block(at: Position3D(x, y, z))!.type
-//                    if (blockType != VoxelType.Air) {
-//                        let f_position = float3(Float(x), Float(y), Float(z))
-//                        let texture = float2(Float((blockType.rawValue-1) % 2), Float((blockType.rawValue-1) / 2))
-//
-//                        if ((voxelManager.grid.block(at: Position3D(x-1, y, z))?.type ?? VoxelType.Air) == VoxelType.Air) {
-//                            vertices.append(contentsOf: TerrainChunk.cubeFace(position: f_position, texture: texture, faceType: .Left))
-//                        }
-//                        if ((voxelManager.grid.block(at: Position3D(x+1, y, z))?.type ?? VoxelType.Air) == VoxelType.Air) {
-//                            vertices.append(contentsOf: TerrainChunk.cubeFace(position: f_position, texture: texture, faceType: .Right))
-//                        }
-//                        if ((voxelManager.grid.block(at: Position3D(x, y+1, z))?.type ?? VoxelType.Air) == VoxelType.Air) {
-//                            vertices.append(contentsOf: TerrainChunk.cubeFace(position: f_position, texture: texture, faceType: .Top))
-//                        }
-//                        if ((voxelManager.grid.block(at: Position3D(x, y-1, z))?.type ?? VoxelType.Air) == VoxelType.Air) {
-//                            vertices.append(contentsOf: TerrainChunk.cubeFace(position: f_position, texture: texture, faceType: .Bottom))
-//                        }
-//                        if ((voxelManager.grid.block(at: Position3D(x, y, z-1))?.type ?? VoxelType.Air) == VoxelType.Air) {
-//                            vertices.append(contentsOf: TerrainChunk.cubeFace(position: f_position, texture: texture, faceType: .Back))
-//                        }
-//                        if ((voxelManager.grid.block(at: Position3D(x, y, z+1))?.type ?? VoxelType.Air) == VoxelType.Air) {
-//                            vertices.append(contentsOf: TerrainChunk.cubeFace(position: f_position, texture: texture, faceType: .Front))
-//                        }
-//                    }
-//                }
-//            }
-//        }
         
         var activeFaces: [[[ [CubeFaceType] ]]] = [[[[CubeFaceType]]]](repeating: [[[CubeFaceType]]](repeating: [[CubeFaceType]](repeating: [], count: 16), count: 16), count: 16)
         
@@ -114,7 +83,7 @@ class TerrainChunk : Node {
                         let f_position = float3(Float(x), Float(y), Float(z))
                         let texture = float2(Float((blockType.rawValue-1) % 2), Float((blockType.rawValue-1) / 2))
                         for face in activeFaces[y][z][x] {
-                            vertices.append(contentsOf: TerrainChunk.cubeFace(position: f_position, texture: texture, faceType: face))
+                            vertices.append(contentsOf: RenderableChunk.cubeFace(position: f_position, texture: texture, faceType: face))
                         }
                     }
                 }
@@ -195,7 +164,7 @@ class TerrainChunk : Node {
     
 }
 
-extension TerrainChunk: Renderable {
+extension RenderableChunk: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
         if (mesh.vertexBuffer != nil) {
             renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.PipelineState(.Basic))
@@ -215,7 +184,7 @@ extension TerrainChunk: Renderable {
 }
 
 class VoxelTerrain {
-    var chunks: [TerrainChunk]
+    var chunks: [RenderableChunk]
     
     init() {
         self.chunks = []

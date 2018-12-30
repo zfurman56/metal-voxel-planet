@@ -16,7 +16,7 @@ class VoxelManager {
     var currentChunk: Position = Position(0, 0)
     
     init() {
-        self.terrain.chunks.append(TerrainChunk(position: Position(0, 0)))
+        self.terrain.chunks.append(RenderableChunk(position: Position(0, 0)))
     }
     
     public func update() {
