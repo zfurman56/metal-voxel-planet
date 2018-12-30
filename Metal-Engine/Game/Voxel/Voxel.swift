@@ -34,6 +34,11 @@ struct Position: Hashable {
         self.x = x
         self.z = z
     }
+    
+    init(_ x: Float, _ z: Float) {
+        self.x = Int(x)
+        self.z = Int(z)
+    }
 }
 
 struct Position3D {
@@ -45,6 +50,12 @@ struct Position3D {
         self.x = x
         self.y = y
         self.z = z
+    }
+    
+    init(_ x: Float, _ y: Float, _ z: Float) {
+        self.x = Int(x)
+        self.y = Int(y)
+        self.z = Int(z)
     }
     
     init(_ vec: float3) {
@@ -71,6 +82,10 @@ class VoxelGrid {
     
     init() {
         self.chunks.updateValue(Chunk(position: Position(0, 0)), forKey: Position(0, 0))
+    }
+    
+    func getChunkPosition(at coord: Position)->Position {
+        return Position(coord.x>>4, coord.z>>4)
     }
     
     func getChunk(at coord: Position)->Chunk? {
