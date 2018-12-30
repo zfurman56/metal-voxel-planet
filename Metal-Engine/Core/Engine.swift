@@ -23,6 +23,7 @@ class Engine {
         RenderPipelineStateLibrary.Initialize()
         MeshLibrary.Initialize()
         TextureLibrary.Initialize(device: device)
+        TerrainGenerationLibrary.Initialize(seed: Preferences.WorldSeed)
         SceneManager.Initialize(Preferences.StartingScene)
     }
 }

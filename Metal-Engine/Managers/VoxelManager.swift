@@ -6,14 +6,17 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
-let theGrid = VoxelGrid()
-let theTerrain = VoxelTerrain()
+let voxelManager = VoxelManager()
 
-//class VoxelManager {
-//    var grid: VoxelGrid
-//    var terrain: VoxelTerrain
-//
-//    static func Initialize() {
-//
-//    }
-//}
+class VoxelManager {
+    let grid: VoxelGrid = VoxelGrid()
+    let terrain: VoxelTerrain = VoxelTerrain()
+    
+    init() {
+        self.terrain.chunks.append(TerrainChunk(position: Position(x:0, y:0)))
+    }
+    
+    func update() {
+        
+    }
+}

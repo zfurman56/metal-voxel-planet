@@ -20,4 +20,5 @@ class Preferences {
     public static var MainPixelFormat: MTLPixelFormat = .bgra8Unorm_srgb
     public static var MainDepthPixelFormat: MTLPixelFormat = MTLPixelFormat.depth32Float
     public static var StartingScene: SceneTypes = .Surface
+    public static var WorldSeed: Int = 1
 }

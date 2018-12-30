@@ -46,6 +46,7 @@
 		92C32D4021D82995000F2293 /* Noise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C32D3F21D82995000F2293 /* Noise.framework */; };
 		92E967BA21D0FB0300E3F338 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E967B921D0FB0300E3F338 /* Node.swift */; };
 		92E967BD21D0FBFE00E3F338 /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E967BC21D0FBFE00E3F338 /* Renderable.swift */; };
+		92FCB12C21D850CC001DC226 /* TerrainGenerationLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FCB12B21D850CC001DC226 /* TerrainGenerationLibrary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		92C32D3F21D82995000F2293 /* Noise.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Noise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E967B921D0FB0300E3F338 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		92E967BC21D0FBFE00E3F338 /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
+		92FCB12B21D850CC001DC226 /* TerrainGenerationLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainGenerationLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 				9225048221D0F5E9004F9EF3 /* MeshLibrary.swift */,
 				92516CFC21D224AD00267DDD /* TextureLibrary.swift */,
 				92516CF721D1CF5A00267DDD /* DepthStencilStateLibrary.swift */,
+				92FCB12B21D850CC001DC226 /* TerrainGenerationLibrary.swift */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				9264101121D0EF0200C4F5E5 /* GameObject.swift in Sources */,
 				92E967BA21D0FB0300E3F338 /* Node.swift in Sources */,
 				9221173A21D0DB3300D4D86D /* Types.swift in Sources */,
+				92FCB12C21D850CC001DC226 /* TerrainGenerationLibrary.swift in Sources */,
 				926F16CB21D196A900398F89 /* KeyCodes.swift in Sources */,
 				9221170621D0B99E00D4D86D /* AppDelegate.swift in Sources */,
 				92C32D3921D76F78000F2293 /* VoxelManager.swift in Sources */,

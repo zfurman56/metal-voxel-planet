@@ -55,7 +55,7 @@ class Chunk {
 
     init(position: Position) {
         self.position = position
-        self.blocks = [[[Voxel]]](elementCreator: [[Voxel]](elementCreator: [Voxel](elementCreator: Voxel(.Dirt), count: 16), count: 16), count: 16)
+        self.blocks = [[[Voxel]]](elementCreator: [[Voxel]](elementCreator: [Voxel](elementCreator: Voxel(.Air), count: 16), count: 16), count: 16)
     }
 }
 
