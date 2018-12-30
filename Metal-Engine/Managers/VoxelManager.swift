@@ -13,7 +13,7 @@ class VoxelManager {
     let terrain: VoxelTerrain = VoxelTerrain()
     
     init() {
-        self.terrain.chunks.append(TerrainChunk(position: Position(x:0, y:0)))
+        self.terrain.chunks.append(TerrainChunk(position: Position(0, 0)))
     }
     
     func update() {

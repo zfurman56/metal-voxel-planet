@@ -28,7 +28,12 @@ class Voxel {
 
 struct Position: Hashable {
     let x: Int
-    let y: Int
+    let z: Int
+    
+    init(_ x: Int, _ z: Int) {
+        self.x = x
+        self.z = z
+    }
 }
 
 struct Position3D {
@@ -65,16 +70,16 @@ class VoxelGrid {
     var chunks: [Position: Chunk] = [:]
     
     init() {
-        self.chunks.updateValue(Chunk(position: Position(x:0, y:0)), forKey: Position(x:0, y:0))
+        self.chunks.updateValue(Chunk(position: Position(0, 0)), forKey: Position(0, 0))
     }
     
     func getChunk(at coord: Position)->Chunk? {
-        let chunkCoord = Position(x: coord.x>>4, y: coord.y>>4)
+        let chunkCoord = Position(coord.x>>4, coord.z>>4)
         return chunks[chunkCoord]
     }
     
     func block(at coord: Position3D)->Voxel? {
-        let chunkCoord = Position(x: coord.x>>4, y: coord.z>>4)
+        let chunkCoord = Position(coord.x>>4, coord.z>>4)
         let blockOffset = Position3D((coord.x<<28)>>28, coord.y, (coord.z<<28)>>28)
 //        print("Coord: \(coord)")
 //        print(blockOffset)
@@ -85,7 +90,7 @@ class VoxelGrid {
     // Closure necessary because structs are pass-by-value and do not modify
     // the original when returned from a function
     func changeBlock(at coord: Position3D, exec: (Voxel)->()) {
-        let chunkCoord = Position(x: coord.x>>4, y: coord.z>>4)
+        let chunkCoord = Position(coord.x>>4, coord.z>>4)
         let blockOffset = Position3D((coord.x<<28)>>28, coord.y, (coord.z<<28)>>28)
         var selectedChunk = chunks[chunkCoord]!
         exec(selectedChunk.blocks[Int(blockOffset.y)][Int(blockOffset.z)][Int(blockOffset.x)])

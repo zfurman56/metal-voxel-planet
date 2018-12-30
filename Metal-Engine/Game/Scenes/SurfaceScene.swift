@@ -25,7 +25,7 @@ class SurfaceScene : Scene {
 //            }
 //        }
         
-        TerrainGenerationLibrary.getTerrain(.Basic).createChunkTerrain(start: Position(x: 0, y: 0))
+        TerrainGenerationLibrary.getTerrain(.Basic).createChunkTerrain(start: Position(0, 0))
         voxelManager.terrain.chunks[0].updateMesh()
         
         addChild(voxelManager.terrain.chunks[0])
