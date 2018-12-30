@@ -6,17 +6,28 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
+import MetalKit
+
 let voxelManager = VoxelManager()
 
 class VoxelManager {
     let grid: VoxelGrid = VoxelGrid()
-    let terrain: VoxelTerrain = VoxelTerrain()
     
     // The chunk the camera is over
-    var currentChunk: Position = Position(0, 0)
+    var currentChunk: Position = Position(Int32(0), Int32(0))
+    
+    var loadedChunks: [RenderableChunk] = []
+    var loadQueue: Queue<Position> = Queue<Position>()
+    var unloadQueue: Queue<Position> = Queue<Position>()
+    var updateQueue: Queue<RenderableChunk> = Queue<RenderableChunk>()
     
     init() {
-        self.terrain.chunks.append(RenderableChunk(position: Position(0, 0)))
+        let chunkDist = Int32(Preferences.ChunkDistance)
+        for z in -chunkDist...chunkDist {
+            for x in -chunkDist...chunkDist {
+                loadQueue.enqueue(Position(x, z))
+            }
+        }
     }
     
     public func update() {
@@ -25,22 +36,80 @@ class VoxelManager {
         let cameraPos = SceneManager.currentScene.cameraManager.currentCamera.position
         let chunkPosition = (self.grid.getChunkPosition(at: Position(cameraPos.x, cameraPos.z)))
         if (chunkPosition != currentChunk) {
+            let chunkDist = Int32(Preferences.ChunkDistance)
+            
+            // We moved left
+            if (chunkPosition.x < currentChunk.x) {
+                for z in -chunkDist...chunkDist {
+                    loadQueue.enqueue(Position(currentChunk.x-chunkDist-1, chunkPosition.z+z))
+                    unloadQueue.enqueue(Position(currentChunk.x+chunkDist, chunkPosition.z+z))
+                }
+            // We moved right
+            } else if (chunkPosition.x > currentChunk.x) {
+                for z in -chunkDist...chunkDist {
+                    loadQueue.enqueue(Position(currentChunk.x+chunkDist+1, chunkPosition.z+z))
+                    unloadQueue.enqueue(Position(currentChunk.x-chunkDist, chunkPosition.z+z))
+                }
+            // We moved back
+            } else if (chunkPosition.z < currentChunk.z) {
+                for x in -chunkDist...chunkDist {
+                    loadQueue.enqueue(Position(chunkPosition.x+x, currentChunk.z-chunkDist-1))
+                    unloadQueue.enqueue(Position(chunkPosition.x+x, currentChunk.z+chunkDist))
+                }
+            // We moved forward
+            } else {
+                for x in -chunkDist...chunkDist {
+                    loadQueue.enqueue(Position(chunkPosition.x+x, currentChunk.z+chunkDist+1))
+                    unloadQueue.enqueue(Position(chunkPosition.x+x, currentChunk.z-chunkDist))
+                }
+            }
             currentChunk = chunkPosition
         }
         
-        createChunks()
+        loadChunks()
+        unloadChunks()
         updateChunks()
     }
     
-    private func createChunks() {
-        
+    private func loadChunks() {
+        while (!loadQueue.isEmpty) {
+            let position = loadQueue.dequeue()!
+            
+            self.grid.chunks.updateValue(Chunk(position: position), forKey: position)
+            TerrainGenerationLibrary.getTerrain(.Basic).createChunkTerrain(start: position)
+            
+            let chunk = RenderableChunk(position: position)
+            chunk.updateMesh()
+            loadedChunks.append(chunk)
+        }
+    }
+    
+    private func unloadChunks() {
+        while (!unloadQueue.isEmpty) {
+            let position = unloadQueue.dequeue()!
+            
+            self.grid.chunks.removeValue(forKey: position)
+            loadedChunks = loadedChunks.filter({$0.gridPosition != position})
+        }
     }
     
     private func updateChunks() {
-        
+        while (!updateQueue.isEmpty) {
+            let chunk = updateQueue.dequeue()!
+            chunk.updateMesh()
+        }
+            
     }
     
-    public func renderChunks() {
-        
+    public func renderChunks(renderCommandEncoder: MTLRenderCommandEncoder) {
+        for chunk in loadedChunks {
+            chunk.render(renderCommandEncoder: renderCommandEncoder)
+        }
+    }
+    
+    public func renderUpdate(deltaTime: Float) {
+        for chunk in loadedChunks {
+            chunk.update(deltaTime: deltaTime)
+        }
     }
 }

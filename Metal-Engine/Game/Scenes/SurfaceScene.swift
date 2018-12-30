@@ -6,7 +6,7 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
-import simd
+import MetalKit
 import Noise
 
 class SurfaceScene : Scene {
@@ -18,14 +18,16 @@ class SurfaceScene : Scene {
         debugCamera.position.y = 18
         debugCamera.position.z = 10
         
-        TerrainGenerationLibrary.getTerrain(.Basic).createChunkTerrain(start: Position(0, 0))
-        voxelManager.terrain.chunks[0].updateMesh()
-        
-        addChild(voxelManager.terrain.chunks[0])
+    }
+    
+    override func render(renderCommandEncoder: MTLRenderCommandEncoder) {
+        super.render(renderCommandEncoder: renderCommandEncoder)
+        voxelManager.renderChunks(renderCommandEncoder: renderCommandEncoder)
     }
     
     override func update(deltaTime: Float) {
         voxelManager.update()
+        voxelManager.renderUpdate(deltaTime: deltaTime)
         super.update(deltaTime: deltaTime)
     }
     

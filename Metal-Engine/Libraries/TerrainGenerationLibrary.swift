@@ -46,15 +46,15 @@ class BasicTerrainGenerator: TerrainGenerator {
     }
     
     func getVoxelTerrain(position: Position3D)->VoxelType {
-        return (position.y <= Int(10 + self.noise.evaluate(Double(position.x), Double(position.z)))) ? VoxelType.Dirt : VoxelType.Air
+        return (position.y <= Int(7 + self.noise.evaluate(Double(position.x), Double(position.z)))) ? VoxelType.Dirt : VoxelType.Air
     }
     
     func createChunkTerrain(start: Position) {
         let chunk = voxelManager.grid.getChunk(at: start)!
-        for y in 0..<16 {
-            for z in 0..<16 {
-                for x in 0..<16 {
-                    chunk.blocks[y][z][x].type = getVoxelTerrain(position: Position3D(x, y, z))
+        for y: Int32 in 0..<16 {
+            for z: Int32 in 0..<16 {
+                for x: Int32 in 0..<16 {
+                    chunk.blocks[Int(y)][Int(z)][Int(x)].type = getVoxelTerrain(position: Position3D(x+(start.x*16), y, z+(start.z*16)))
                 }
             }
         }

@@ -41,6 +41,9 @@ class RenderableChunk : Node {
         self.mesh = TerrainMesh(vertices: [Vertex(position: float3(0), texel: float2(0), normals: float3(0))])
         
         super.init()
+        
+        self.position = float3(Float(position.x*16), 0, Float(position.z*16))
+        updateMesh()
     }
     
     override func update(deltaTime: Float) {
@@ -52,16 +55,17 @@ class RenderableChunk : Node {
         
         var activeFaces: [[[ [CubeFaceType] ]]] = [[[[CubeFaceType]]]](repeating: [[[CubeFaceType]]](repeating: [[CubeFaceType]](repeating: [], count: 16), count: 16), count: 16)
         
-        func appendFace(_ x: Int, _ y: Int, _ z: Int, face: CubeFaceType) {
-            if ((x>0) && (x<16) && (y>0) && (y<16) && (z>0) && (z<16)) {
-                activeFaces[y][z][x].append(face)
+        func appendFace(_ x: Int32, _ y: Int32, _ z: Int32, face: CubeFaceType) {
+            if ((x>=0) && (x<16) && (y>=0) && (y<16) && (z>=0) && (z<16)) {
+                activeFaces[Int(y)][Int(z)][Int(x)].append(face)
             }
         }
         
-        for y in -1..<17 {
-            for z in -1..<17 {
-                for x in -1..<17 {
-                    let blockType = voxelManager.grid.block(at: Position3D(x, y, z))?.type
+        for y: Int32 in -1..<17 {
+            for z: Int32 in -1..<17 {
+                for x: Int32 in -1..<17 {
+                    let position = Position3D(x+(gridPosition.x*16), y, z+(gridPosition.z*16))
+                    let blockType = voxelManager.grid.block(at: position)?.type
                     if (blockType == VoxelType.Air) {
                         appendFace(x+1, y, z, face: .Left)
                         appendFace(x-1, y, z, face: .Right)
@@ -73,7 +77,7 @@ class RenderableChunk : Node {
                 }
             }
         }
-
+        
         let thisChunk = voxelManager.grid.getChunk(at: self.gridPosition)
         for y in 0..<16 {
             for z in 0..<16 {

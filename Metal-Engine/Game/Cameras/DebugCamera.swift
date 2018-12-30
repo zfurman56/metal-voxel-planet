@@ -60,7 +60,9 @@ class DebugCamera : Camera {
             let impact = VoxelRaycast.raycast(origin: self.position, direction: unitVector, radius: 20, callback: callback)
             if (impact != nil) {
                 voxelManager.grid.changeBlock(at: Position3D(impact!), exec: { $0.type = VoxelType.Air })
-                voxelManager.terrain.chunks[0].updateMesh()
+                let chunkPosition: Position = voxelManager.grid.getChunkPosition(at: Position(impact!.x, impact!.z))
+                let renderable: RenderableChunk = voxelManager.loadedChunks.first(where: {$0.gridPosition == chunkPosition})!
+                voxelManager.updateQueue.enqueue(renderable)
             }
         }
         if (Keyboard.IsKeyPressed(.escape)) {

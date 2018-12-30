@@ -27,41 +27,41 @@ class Voxel {
 }
 
 struct Position: Hashable {
-    let x: Int
-    let z: Int
+    let x: Int32
+    let z: Int32
     
-    init(_ x: Int, _ z: Int) {
+    init(_ x: Int32, _ z: Int32) {
         self.x = x
         self.z = z
     }
     
     init(_ x: Float, _ z: Float) {
-        self.x = Int(x)
-        self.z = Int(z)
+        self.x = Int32(x)
+        self.z = Int32(z)
     }
 }
 
 struct Position3D {
-    let x: Int
-    let y: Int
-    let z: Int
+    let x: Int32
+    let y: Int32
+    let z: Int32
     
-    init(_ x: Int, _ y:Int, _ z: Int) {
-        self.x = x
-        self.y = y
-        self.z = z
+    init(_ x: Int32, _ y: Int32, _ z: Int32) {
+        self.x = Int32(x)
+        self.y = Int32(y)
+        self.z = Int32(z)
     }
     
     init(_ x: Float, _ y: Float, _ z: Float) {
-        self.x = Int(x)
-        self.y = Int(y)
-        self.z = Int(z)
+        self.x = Int32(x)
+        self.y = Int32(y)
+        self.z = Int32(z)
     }
     
     init(_ vec: float3) {
-        self.x = Int(vec.x)
-        self.y = Int(vec.y)
-        self.z = Int(vec.z)
+        self.x = Int32(vec.x)
+        self.y = Int32(vec.y)
+        self.z = Int32(vec.z)
     }
 }
 
@@ -81,7 +81,7 @@ class VoxelGrid {
     var chunks: [Position: Chunk] = [:]
     
     init() {
-        self.chunks.updateValue(Chunk(position: Position(0, 0)), forKey: Position(0, 0))
+//        self.chunks.updateValue(Chunk(position: Position(0, 0)), forKey: Position(0, 0))
     }
     
     func getChunkPosition(at coord: Position)->Position {
@@ -89,13 +89,12 @@ class VoxelGrid {
     }
     
     func getChunk(at coord: Position)->Chunk? {
-        let chunkCoord = Position(coord.x>>4, coord.z>>4)
-        return chunks[chunkCoord]
+        return chunks[coord]
     }
     
     func block(at coord: Position3D)->Voxel? {
         let chunkCoord = Position(coord.x>>4, coord.z>>4)
-        let blockOffset = Position3D((coord.x<<28)>>28, coord.y, (coord.z<<28)>>28)
+        let blockOffset = Position3D(Int32(UInt32(bitPattern: coord.x<<28)>>28), coord.y, Int32(UInt32(bitPattern: coord.z<<28)>>28))
 //        print("Coord: \(coord)")
 //        print(blockOffset)
         let selectedChunk = chunks[chunkCoord]
@@ -106,7 +105,7 @@ class VoxelGrid {
     // the original when returned from a function
     func changeBlock(at coord: Position3D, exec: (Voxel)->()) {
         let chunkCoord = Position(coord.x>>4, coord.z>>4)
-        let blockOffset = Position3D((coord.x<<28)>>28, coord.y, (coord.z<<28)>>28)
+        let blockOffset = Position3D(Int32(UInt32(bitPattern: coord.x<<28)>>28), coord.y, Int32(UInt32(bitPattern: coord.z<<28)>>28))
         var selectedChunk = chunks[chunkCoord]!
         exec(selectedChunk.blocks[Int(blockOffset.y)][Int(blockOffset.z)][Int(blockOffset.x)])
     }
