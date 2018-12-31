@@ -22,13 +22,21 @@ class TerrainMesh : SafeMesh {
     }
 }
 
-enum CubeFaceType {
+enum CubeFaceType: UInt8, CaseIterable {
     case Left
     case Right
     case Top
     case Bottom
     case Back
     case Front
+}
+
+struct FaceBitPack {
+    var byte: UInt8 = 0
+    
+    func get(face: CubeFaceType)->Bool {
+        return (byte & (0x1<<face.rawValue)) != 0
+    }
 }
 
 class RenderableChunk : Node {
@@ -53,11 +61,11 @@ class RenderableChunk : Node {
     public func updateMesh() {
         var vertices: [Vertex] = []
         
-        var activeFaces: [[[ [CubeFaceType] ]]] = [[[[CubeFaceType]]]](repeating: [[[CubeFaceType]]](repeating: [[CubeFaceType]](repeating: [], count: 16), count: 16), count: 16)
+        var activeFaces: [[[ FaceBitPack ]]] = [[[FaceBitPack]]](repeating: [[FaceBitPack]](repeating: [FaceBitPack](repeating: FaceBitPack(), count: 16), count: 16), count: 16)
         
         func appendFace(_ x: Int32, _ y: Int32, _ z: Int32, face: CubeFaceType) {
             if ((x>=0) && (x<16) && (y>=0) && (y<16) && (z>=0) && (z<16)) {
-                activeFaces[Int(y)][Int(z)][Int(x)].append(face)
+                activeFaces[Int(y)][Int(z)][Int(x)].byte |= (0x1<<face.rawValue)
             }
         }
         
@@ -86,8 +94,10 @@ class RenderableChunk : Node {
                     if (blockType != VoxelType.Air) {
                         let f_position = float3(Float(x), Float(y), Float(z))
                         let texture = float2(Float((blockType.rawValue-1) % 2), Float((blockType.rawValue-1) / 2))
-                        for face in activeFaces[y][z][x] {
-                            vertices.append(contentsOf: RenderableChunk.cubeFace(position: f_position, texture: texture, faceType: face))
+                        for face in CubeFaceType.allCases {
+                            if (activeFaces[y][z][x].get(face: face)) {
+                                vertices.append(contentsOf: RenderableChunk.cubeFace(position: f_position, texture: texture, faceType: face))
+                            }
                         }
                     }
                 }
