@@ -19,7 +19,7 @@ enum VoxelType: UInt8 {
     case Dirt   = 1
 }
 
-class Voxel {
+final class Voxel {
     var type: VoxelType
     init(_ type: VoxelType) {
         self.type = type
@@ -65,7 +65,7 @@ struct Position3D {
     }
 }
 
-class Chunk {
+final class Chunk {
     var position: Position
     var blocks: [[[Voxel]]]
 
@@ -77,7 +77,7 @@ class Chunk {
 
 
 // Internal representation of voxel grid - see VoxelTerrain for rendering
-class VoxelGrid {
+final class VoxelGrid {
     var chunks: [Position: Chunk] = [:]
     var cache: Chunk?
     

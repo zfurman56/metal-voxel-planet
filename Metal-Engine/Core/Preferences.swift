@@ -15,7 +15,7 @@ public enum ClearColors {
     static let Black: MTLClearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
 }
 
-class Preferences {
+final class Preferences {
     public static var ClearColor: MTLClearColor = ClearColors.Black
     public static var MainPixelFormat: MTLPixelFormat = .bgra8Unorm_srgb
     public static var MainDepthPixelFormat: MTLPixelFormat = MTLPixelFormat.depth32Float

@@ -9,7 +9,7 @@
 import simd
 import AppKit
 
-class DebugCamera : Camera {
+final class DebugCamera : Camera {
     var cameraType: CameraTypes = .Debug
     var position: float3 = float3(0)
     var velocity: float3 = float3(0)

@@ -16,7 +16,7 @@ enum FragmentShaderTypes : Int {
     case Basic
 }
 
-class ShaderLibrary {
+final class ShaderLibrary {
     public static var DefaultLibrary: MTLLibrary!
     
     private static var vertexShaders: [Shader] = []

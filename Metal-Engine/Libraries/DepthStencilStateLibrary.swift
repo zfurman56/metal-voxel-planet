@@ -12,7 +12,7 @@ enum DepthStencilStateTypes : Int {
     case Less
 }
 
-class DepthStencilStateLibrary {
+final class DepthStencilStateLibrary {
     
     private static var _depthStencilStates: [DepthStencilState] = []
     

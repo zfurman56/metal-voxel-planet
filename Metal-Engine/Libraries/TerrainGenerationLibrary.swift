@@ -13,7 +13,7 @@ enum TerrainTypes : Int {
     case Basic
 }
 
-class TerrainGenerationLibrary {
+final class TerrainGenerationLibrary {
     private static var terrains: [TerrainGenerator] = []
     
     public static func Initialize(seed: Int) {

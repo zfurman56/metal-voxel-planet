@@ -13,7 +13,7 @@ enum RenderPipelineStateTypes : Int {
     case Basic
 }
 
-class RenderPipelineStateLibrary {
+final class RenderPipelineStateLibrary {
     
     private static var renderPipelineStates: [RenderPipelineState] = []
     

@@ -12,7 +12,7 @@ enum RenderPipelineDescriptorTypes : Int {
     case Basic
 }
 
-class RenderPipelineDescriptorLibrary {
+final class RenderPipelineDescriptorLibrary {
     private static var renderPipelineDescriptors: [RenderPipelineDescriptor] = []
 
     public static func Initialize() {

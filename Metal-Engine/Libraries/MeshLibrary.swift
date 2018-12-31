@@ -41,7 +41,7 @@ class Prefab: Mesh {
     }
 }
 
-class MeshLibrary {
+final class MeshLibrary {
     private static var meshes: [Mesh] = []
     
     public static func Initialize() {

@@ -12,7 +12,7 @@ enum VertexDescriptorTypes : Int {
     case Basic
 }
 
-class VertexDescriptorLibrary {
+final class VertexDescriptorLibrary {
     
     private static var vertexDescriptors: [VertexDescriptor] = []
     

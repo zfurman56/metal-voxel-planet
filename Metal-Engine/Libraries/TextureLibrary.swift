@@ -26,7 +26,7 @@ class Texture {
     }
 }
 
-class TextureLibrary {
+final class TextureLibrary {
     private static var textures: [Texture] = []
     
     public static func Initialize(device: MTLDevice) {

@@ -10,7 +10,7 @@ import MetalKit
 
 let voxelManager = VoxelManager()
 
-class VoxelManager {
+final class VoxelManager {
     let grid: VoxelGrid = VoxelGrid()
     
     // The chunk the camera is over
@@ -71,6 +71,8 @@ class VoxelManager {
         unloadChunks()
         setupChunks()
         updateChunks()
+        
+        self.loadedChunks[0].updateMesh()
     }
     
     private func loadChunks() {

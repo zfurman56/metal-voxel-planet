@@ -39,7 +39,7 @@ struct FaceBitPack {
     }
 }
 
-class RenderableChunk : Node {
+final class RenderableChunk : Node {
     var uniforms: Uniforms = Uniforms()
     var mesh: TerrainMesh
     var gridPosition: Position
