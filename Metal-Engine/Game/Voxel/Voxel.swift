@@ -79,10 +79,7 @@ class Chunk {
 // Internal representation of voxel grid - see VoxelTerrain for rendering
 class VoxelGrid {
     var chunks: [Position: Chunk] = [:]
-    
-    init() {
-//        self.chunks.updateValue(Chunk(position: Position(0, 0)), forKey: Position(0, 0))
-    }
+    var cache: Chunk?
     
     func getChunkPosition(at coord: Position)->Position {
         return Position(coord.x>>4, coord.z>>4)
@@ -95,10 +92,10 @@ class VoxelGrid {
     func block(at coord: Position3D)->Voxel? {
         let chunkCoord = Position(coord.x>>4, coord.z>>4)
         let blockOffset = Position3D(Int32(UInt32(bitPattern: coord.x<<28)>>28), coord.y, Int32(UInt32(bitPattern: coord.z<<28)>>28))
-//        print("Coord: \(coord)")
-//        print(blockOffset)
-        let selectedChunk = chunks[chunkCoord]
-        return selectedChunk?.blocks[safe: Int(blockOffset.y)]?[safe: Int(blockOffset.z)]?[safe: Int(blockOffset.x)]
+        if (cache?.position != chunkCoord) {
+            cache = chunks[chunkCoord]
+        }
+        return cache?.blocks[safe: Int(blockOffset.y)]?[safe: Int(blockOffset.z)]?[safe: Int(blockOffset.x)]
     }
     
     // Closure necessary because structs are pass-by-value and do not modify
@@ -106,7 +103,9 @@ class VoxelGrid {
     func changeBlock(at coord: Position3D, exec: (Voxel)->()) {
         let chunkCoord = Position(coord.x>>4, coord.z>>4)
         let blockOffset = Position3D(Int32(UInt32(bitPattern: coord.x<<28)>>28), coord.y, Int32(UInt32(bitPattern: coord.z<<28)>>28))
-        var selectedChunk = chunks[chunkCoord]!
-        exec(selectedChunk.blocks[Int(blockOffset.y)][Int(blockOffset.z)][Int(blockOffset.x)])
+        if (cache?.position != chunkCoord) {
+            cache = chunks[chunkCoord]
+        }
+        exec(cache!.blocks[Int(blockOffset.y)][Int(blockOffset.z)][Int(blockOffset.x)])
     }
 }
