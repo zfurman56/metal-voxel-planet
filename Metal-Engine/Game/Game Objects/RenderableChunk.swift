@@ -41,12 +41,11 @@ struct FaceBitPack {
 
 final class RenderableChunk : Node {
     var uniforms: Uniforms = Uniforms()
-    var mesh: TerrainMesh
+    var mesh: TerrainMesh = TerrainMesh(vertices: [])
     var gridPosition: Position
     
     init(position: Position) {
         self.gridPosition = position
-        self.mesh = TerrainMesh(vertices: [Vertex(position: float3(0), texel: float2(0), normals: float3(0))])
         
         super.init()
         
