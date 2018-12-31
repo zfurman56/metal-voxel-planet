@@ -16,7 +16,7 @@ final class VoxelManager {
     // The chunk the camera is over
     var currentChunk: Position = Position(Int32(0), Int32(0))
     
-    var loadedChunks: [RenderableChunk] = []
+    var loadedChunks: ContiguousArray<RenderableChunk> = []
     var loadQueue: Queue<Position> = Queue<Position>()
     var setupQueue: Queue<Position> = Queue<Position>()
     var unloadQueue: Queue<Position> = Queue<Position>()

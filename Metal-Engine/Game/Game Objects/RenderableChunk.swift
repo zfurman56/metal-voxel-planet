@@ -61,7 +61,7 @@ final class RenderableChunk : Node {
     public func updateMesh() {
         var vertices: [Vertex] = []
         
-        var activeFaces: [[[ FaceBitPack ]]] = [[[FaceBitPack]]](repeating: [[FaceBitPack]](repeating: [FaceBitPack](repeating: FaceBitPack(), count: 16), count: 16), count: 16)
+        var activeFaces: ContiguousArray<ContiguousArray<ContiguousArray<FaceBitPack>>> = ContiguousArray<ContiguousArray<ContiguousArray<FaceBitPack>>>(repeating: ContiguousArray<ContiguousArray<FaceBitPack>>(repeating: ContiguousArray<FaceBitPack>(repeating: FaceBitPack(), count: 16), count: 16), count: 16)
         
         func appendFace(_ x: Int32, _ y: Int32, _ z: Int32, face: CubeFaceType) {
             if ((x>=0) && (x<16) && (y>=0) && (y<16) && (z>=0) && (z<16)) {

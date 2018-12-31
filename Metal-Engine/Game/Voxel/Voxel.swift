@@ -67,11 +67,11 @@ struct Position3D {
 
 class Chunk {
     var position: Position
-    var blocks: [[[Voxel]]]
+    var blocks: ContiguousArray<ContiguousArray<ContiguousArray<Voxel>>>
 
     init(position: Position) {
         self.position = position
-        self.blocks = [[[Voxel]]](elementCreator: [[Voxel]](elementCreator: [Voxel](elementCreator: Voxel(.Air), count: 16), count: 16), count: 16)
+        self.blocks = ContiguousArray<ContiguousArray<ContiguousArray<Voxel>>>(repeating: ContiguousArray<ContiguousArray<Voxel>>(repeating: ContiguousArray<Voxel>(repeating: Voxel(.Air), count: 16), count: 16), count: 16)
     }
 }
 

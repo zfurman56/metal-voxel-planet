@@ -71,7 +71,7 @@ struct Uniforms: sizeable {
 
 // copied from https://github.com/raywenderlich/swift-algorithm-club/tree/master/Queue
 public struct Queue<T> {
-    fileprivate var array = [T?]()
+    fileprivate var array = ContiguousArray<T?>()
     fileprivate var head = 0
     
     public var isEmpty: Bool {
