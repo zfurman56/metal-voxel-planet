@@ -71,8 +71,6 @@ final class VoxelManager {
         unloadChunks()
         setupChunks()
         updateChunks()
-        
-        self.loadedChunks[0].updateMesh()
     }
     
     private func loadChunks() {

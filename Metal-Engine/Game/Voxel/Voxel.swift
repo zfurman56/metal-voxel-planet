@@ -19,7 +19,7 @@ enum VoxelType: UInt8 {
     case Dirt   = 1
 }
 
-final class Voxel {
+struct Voxel {
     var type: VoxelType
     init(_ type: VoxelType) {
         self.type = type
@@ -65,7 +65,7 @@ struct Position3D {
     }
 }
 
-final class Chunk {
+class Chunk {
     var position: Position
     var blocks: [[[Voxel]]]
 
@@ -100,12 +100,12 @@ final class VoxelGrid {
     
     // Closure necessary because structs are pass-by-value and do not modify
     // the original when returned from a function
-    func changeBlock(at coord: Position3D, exec: (Voxel)->()) {
+    func changeBlock(at coord: Position3D, voxel: Voxel) {
         let chunkCoord = Position(coord.x>>4, coord.z>>4)
         let blockOffset = Position3D(Int32(UInt32(bitPattern: coord.x<<28)>>28), coord.y, Int32(UInt32(bitPattern: coord.z<<28)>>28))
         if (cache?.position != chunkCoord) {
             cache = chunks[chunkCoord]
         }
-        exec(cache!.blocks[Int(blockOffset.y)][Int(blockOffset.z)][Int(blockOffset.x)])
+        cache!.blocks[Int(blockOffset.y)][Int(blockOffset.z)][Int(blockOffset.x)] = voxel
     }
 }
