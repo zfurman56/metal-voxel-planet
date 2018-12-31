@@ -18,6 +18,7 @@ class VoxelManager {
     
     var loadedChunks: [RenderableChunk] = []
     var loadQueue: Queue<Position> = Queue<Position>()
+    var setupQueue: Queue<Position> = Queue<Position>()
     var unloadQueue: Queue<Position> = Queue<Position>()
     var updateQueue: Queue<RenderableChunk> = Queue<RenderableChunk>()
     
@@ -68,6 +69,7 @@ class VoxelManager {
         
         loadChunks()
         unloadChunks()
+        setupChunks()
         updateChunks()
     }
     
@@ -77,6 +79,14 @@ class VoxelManager {
             
             self.grid.chunks.updateValue(Chunk(position: position), forKey: position)
             TerrainGenerationLibrary.getTerrain(.Basic).createChunkTerrain(start: position)
+            
+            setupQueue.enqueue(position)
+        }
+    }
+    
+    private func setupChunks() {
+        while (!setupQueue.isEmpty) {
+            let position = setupQueue.dequeue()!
             
             let chunk = RenderableChunk(position: position)
             chunk.updateMesh()
