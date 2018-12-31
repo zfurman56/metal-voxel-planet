@@ -29,7 +29,7 @@ final class TerrainGenerationLibrary {
     }
 }
 
-protocol TerrainGenerator {
+protocol TerrainGenerator: AnyObject {
     var seed: Int {get}
 
     func getVoxelTerrain(position: Position3D)->VoxelType

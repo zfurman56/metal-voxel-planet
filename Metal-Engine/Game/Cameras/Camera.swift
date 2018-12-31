@@ -12,7 +12,7 @@ enum CameraTypes {
     case Debug
 }
 
-protocol Camera {
+protocol Camera: AnyObject {
     var cameraType: CameraTypes { get }
     var position: float3 { get set }
     var rotation: float3 { get set }

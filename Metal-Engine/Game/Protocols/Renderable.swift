@@ -8,7 +8,7 @@
 
 import MetalKit
 
-protocol Renderable {
+protocol Renderable: AnyObject {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder)
 }
 

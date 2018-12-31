@@ -28,7 +28,7 @@ final class RenderPipelineDescriptorLibrary {
     }
 }
 
-protocol RenderPipelineDescriptor {
+protocol RenderPipelineDescriptor: AnyObject {
     var name: String { get }
     var renderPipelineDescriptor: MTLRenderPipelineDescriptor! { get }
 }

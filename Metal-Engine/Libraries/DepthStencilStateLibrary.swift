@@ -30,7 +30,7 @@ final class DepthStencilStateLibrary {
     
 }
 
-protocol DepthStencilState {
+protocol DepthStencilState: AnyObject {
     var depthStencilState: MTLDepthStencilState! { get }
 }
 

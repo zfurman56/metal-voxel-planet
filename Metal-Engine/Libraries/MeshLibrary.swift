@@ -12,12 +12,12 @@ enum PrefabTypes : Int {
     case CubePrefab
 }
 
-protocol Mesh {
+protocol Mesh: AnyObject {
     var vertexBuffer: MTLBuffer! { get }
     var vertexCount: Int! { get }
 }
 
-protocol SafeMesh {
+protocol SafeMesh: AnyObject {
     var vertexBuffer: MTLBuffer? { get }
     var vertexCount: Int! { get }
 }

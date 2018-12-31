@@ -30,7 +30,7 @@ final class VertexDescriptorLibrary {
     
 }
 
-protocol VertexDescriptor {
+protocol VertexDescriptor: AnyObject {
     var name: String { get }
     var vertexDescriptor: MTLVertexDescriptor! { get }
 }

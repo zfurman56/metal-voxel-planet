@@ -31,7 +31,7 @@ final class RenderPipelineStateLibrary {
     
 }
 
-protocol RenderPipelineState {
+protocol RenderPipelineState: AnyObject {
     var name: String { get }
     var renderPipelineState: MTLRenderPipelineState! { get }
 }
