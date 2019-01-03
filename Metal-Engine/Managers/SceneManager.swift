@@ -10,6 +10,7 @@ import MetalKit
 
 enum SceneTypes{
     case Surface
+    case Space
 }
 
 // Global singleton, manages scene selection and scene updates
@@ -25,6 +26,8 @@ class SceneManager {
         switch sceneType {
         case .Surface:
             currentScene = SurfaceScene()
+        case .Space:
+            currentScene = SpaceScene()
         }
     }
     
