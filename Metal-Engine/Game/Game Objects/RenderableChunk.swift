@@ -39,8 +39,7 @@ struct FaceBitPack {
     }
 }
 
-final class RenderableChunk : Node {
-    var uniforms: Uniforms = Uniforms()
+final class RenderableChunk : GameObject {
     var mesh: TerrainMesh = TerrainMesh(vertices: [])
     var gridPosition: Position
     
@@ -51,10 +50,6 @@ final class RenderableChunk : Node {
         
         self.position = float3(Float(position.x*16), 0, Float(position.z*16))
         updateMesh()
-    }
-    
-    override func update(deltaTime: Float) {
-        updateUniforms()
     }
     
     // In order to save GPU time, we should only render the block faces that
@@ -175,13 +170,6 @@ final class RenderableChunk : Node {
         }
         return face
     }
-    
-    private func updateUniforms() {
-        uniforms.modelViewProjectionMatrix = SceneManager.currentScene.cameraManager.currentCamera.projectionMatrix * SceneManager.currentScene.cameraManager.currentCamera.viewMatrix * self.modelMatrix
-        uniforms.normalMatrix = self.normalMatrix
-    }
-    
-    
 }
 
 // Tell the command encoder how to render chunks
