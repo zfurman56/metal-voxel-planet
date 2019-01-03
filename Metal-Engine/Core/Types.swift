@@ -39,6 +39,7 @@ extension Collection where Indices.Iterator.Element == Index {
     }
 }
 
+extension UInt16: sizeable {}
 extension Float: sizeable {}
 extension float2: sizeable {}
 extension float3: sizeable {}
