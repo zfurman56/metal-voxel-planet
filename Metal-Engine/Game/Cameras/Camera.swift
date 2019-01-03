@@ -10,6 +10,7 @@ import simd
 
 enum CameraTypes {
     case Debug
+    case Ballistic
 }
 
 protocol Camera: AnyObject {
