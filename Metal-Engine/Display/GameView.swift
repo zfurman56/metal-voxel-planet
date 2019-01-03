@@ -40,6 +40,8 @@ extension GameView {
         Keyboard.SetKeyPressed(event.keyCode, isOn: false)
     }
     
+    // This will throw an error sometimes because KeyCodes.swift is
+    // not complete; see KeyCodes.swift
     override func flagsChanged(with event: NSEvent) {
         Keyboard.SetKeyPressed(event.keyCode, isOn: !Keyboard.IsKeyPressed(KeyCodes(rawValue: event.keyCode)!))
     }

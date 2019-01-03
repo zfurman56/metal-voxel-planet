@@ -23,6 +23,7 @@ final class VoxelManager {
     var updateQueue: Queue<RenderableChunk> = Queue<RenderableChunk>()
     
     init() {
+        // The initial loaded chunks should be the surrounding ones
         let chunkDist = Int32(Preferences.ChunkDistance)
         for z in -chunkDist...chunkDist {
             for x in -chunkDist...chunkDist {
@@ -37,6 +38,9 @@ final class VoxelManager {
         let cameraPos = SceneManager.currentScene.cameraManager.currentCamera.position
         let chunkPosition = (self.grid.getChunkPosition(at: Position(cameraPos.x, cameraPos.z)))
         if (chunkPosition != currentChunk) {
+            // We don't have to unload everything and load it again, we can just unload the chunks
+            // from the direction we left and load the chunks in the direction we're going
+            
             let chunkDist = Int32(Preferences.ChunkDistance)
             
             // We moved left
@@ -73,6 +77,7 @@ final class VoxelManager {
         updateChunks()
     }
     
+    // Create the chunk's block array and fill it with terrain
     private func loadChunks() {
         while (!loadQueue.isEmpty) {
             let position = loadQueue.dequeue()!
@@ -84,6 +89,7 @@ final class VoxelManager {
         }
     }
     
+    // Create the actual chunk mesh that gets rendered
     private func setupChunks() {
         while (!setupQueue.isEmpty) {
             let position = setupQueue.dequeue()!
@@ -94,6 +100,8 @@ final class VoxelManager {
         }
     }
     
+    // Remove both the chunk blocks and the chunk mesh from storage
+    // Swift's ARC will automatically deallocate them
     private func unloadChunks() {
         while (!unloadQueue.isEmpty) {
             let position = unloadQueue.dequeue()!
@@ -103,6 +111,7 @@ final class VoxelManager {
         }
     }
     
+    // Update any chunk meshes that have been changed
     private func updateChunks() {
         while (!updateQueue.isEmpty) {
             let chunk = updateQueue.dequeue()!
@@ -111,12 +120,14 @@ final class VoxelManager {
             
     }
     
+    // Render every chunk that's loaded
     public func renderChunks(renderCommandEncoder: MTLRenderCommandEncoder) {
         for chunk in loadedChunks {
             chunk.render(renderCommandEncoder: renderCommandEncoder)
         }
     }
     
+    // Update the rendering uniforms for every loaded chunk
     public func renderUpdate(deltaTime: Float) {
         for chunk in loadedChunks {
             chunk.update(deltaTime: deltaTime)

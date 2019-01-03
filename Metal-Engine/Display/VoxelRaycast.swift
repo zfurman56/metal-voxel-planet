@@ -23,7 +23,8 @@ class VoxelRaycast
      * segment from point 'origin' in vector direction 'direction' of length
      * 'radius'. 'radius' may be infinite, but beware infinite loop in this case.
      *
-     * 'face' is the normal vector of the face of that block that was entered.
+     * 'face' is the normal vector of the face of that block that was entered. Currently
+     *  commented out because it has not been needed, but can be added back in.
      *
      * If the callback returns a true value, the traversal will be stopped.
      */
@@ -39,8 +40,6 @@ class VoxelRaycast
         // <http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.42.3443>
         // Extensions to the described algorithm:
         //   • Imposed a distance limit.
-        //   • The face passed through to reach the current cube is provided to
-        //     the callback.
 
         // The foundation of this algorithm is a parameterized representation of
         // the provided ray,

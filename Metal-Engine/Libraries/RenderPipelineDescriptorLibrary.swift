@@ -12,6 +12,7 @@ enum RenderPipelineDescriptorTypes : Int {
     case Basic
 }
 
+// Global singleton, contains render pipeline options
 final class RenderPipelineDescriptorLibrary {
     private static var renderPipelineDescriptors: [RenderPipelineDescriptor] = []
 

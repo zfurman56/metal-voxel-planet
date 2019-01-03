@@ -16,6 +16,7 @@ enum FragmentShaderTypes : Int {
     case Basic
 }
 
+// Global singleton, manages shader selection
 final class ShaderLibrary {
     public static var DefaultLibrary: MTLLibrary!
     

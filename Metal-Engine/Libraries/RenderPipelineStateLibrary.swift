@@ -13,6 +13,7 @@ enum RenderPipelineStateTypes : Int {
     case Basic
 }
 
+// Global singleton, creates render pipeline state object from descriptor and caches it
 final class RenderPipelineStateLibrary {
     
     private static var renderPipelineStates: [RenderPipelineState] = []

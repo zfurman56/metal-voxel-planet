@@ -24,6 +24,7 @@
 		9221174A21D0EBE600D4D86D /* RenderPipelineStateLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221174921D0EBE600D4D86D /* RenderPipelineStateLibrary.swift */; };
 		9225048121D0F15E004F9EF3 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225048021D0F15E004F9EF3 /* Renderer.swift */; };
 		9225048321D0F5E9004F9EF3 /* MeshLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225048221D0F5E9004F9EF3 /* MeshLibrary.swift */; };
+		9225991421DAA77F003E1EC8 /* SpaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225991321DAA77F003E1EC8 /* SpaceScene.swift */; };
 		924714B621D34DC5004D1475 /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 924714B521D34DC5004D1475 /* grass.jpg */; };
 		92516CF821D1CF5A00267DDD /* DepthStencilStateLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92516CF721D1CF5A00267DDD /* DepthStencilStateLibrary.swift */; };
 		92516CFD21D224AD00267DDD /* TextureLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92516CFC21D224AD00267DDD /* TextureLibrary.swift */; };
@@ -91,6 +92,7 @@
 		9221174921D0EBE600D4D86D /* RenderPipelineStateLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPipelineStateLibrary.swift; sourceTree = "<group>"; };
 		9225048021D0F15E004F9EF3 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		9225048221D0F5E9004F9EF3 /* MeshLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshLibrary.swift; sourceTree = "<group>"; };
+		9225991321DAA77F003E1EC8 /* SpaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceScene.swift; sourceTree = "<group>"; };
 		924714B521D34DC5004D1475 /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = grass.jpg; path = "Metal-Engine/Assets/grass.jpg"; sourceTree = SOURCE_ROOT; };
 		92516CF721D1CF5A00267DDD /* DepthStencilStateLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthStencilStateLibrary.swift; sourceTree = "<group>"; };
 		92516CFC21D224AD00267DDD /* TextureLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLibrary.swift; sourceTree = "<group>"; };
@@ -254,6 +256,13 @@
 			path = Libraries;
 			sourceTree = "<group>";
 		};
+		9225991521DAD136003E1EC8 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GUI;
+			sourceTree = "<group>";
+		};
 		92516CFB21D21B3F00267DDD /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +275,7 @@
 		9264100F21D0EEEB00C4F5E5 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				9225991521DAD136003E1EC8 /* GUI */,
 				9297274821D4A279000303BB /* Voxel */,
 				926F16BD21D17F0C00398F89 /* Scenes */,
 				92E967BE21D0FD7B00E3F338 /* Game Objects */,
@@ -299,6 +309,7 @@
 			children = (
 				926F16BE21D17F1A00398F89 /* Scene.swift */,
 				929AF1BB21D5D7AB00C07564 /* SurfaceScene.swift */,
+				9225991321DAA77F003E1EC8 /* SpaceScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -508,6 +519,7 @@
 				9266D5FC21D1B53100CF59AD /* DebugCamera.swift in Sources */,
 				929AF1C221D5F14600C07564 /* CameraManager.swift in Sources */,
 				9221174421D0E2C600D4D86D /* ShaderLibrary.swift in Sources */,
+				9225991421DAA77F003E1EC8 /* SpaceScene.swift in Sources */,
 				9225048121D0F15E004F9EF3 /* Renderer.swift in Sources */,
 				9221174021D0DED400D4D86D /* Engine.swift in Sources */,
 				92516CF821D1CF5A00267DDD /* DepthStencilStateLibrary.swift in Sources */,

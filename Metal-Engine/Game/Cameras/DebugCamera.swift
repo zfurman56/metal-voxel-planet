@@ -50,11 +50,14 @@ final class DebugCamera : Camera {
         if (Keyboard.IsKeyPressed(.shift)) {
             self.position.y -= deltaTime*verticalSpeed
         }
+
         if (Mouse.IsMouseButtonPressed(button: .left)) {
+            // Hide and lock cursor when window clicked
             isCursorLocked = true
             CGAssociateMouseAndMouseCursorPosition(boolean_t(truncating: false))
             NSCursor.hide()
             
+            // See if we clicked a block, if so destroy it
             let unitVector = RotationToUnitVector(rotation: self.rotation)
             let callback = { (coord: float3) -> Bool in return ((voxelManager.grid.block(at: Position3D(coord))?.type ?? VoxelType.Air) != VoxelType.Air) }
             let impact = VoxelRaycast.raycast(origin: self.position, direction: unitVector, radius: 20, callback: callback)
@@ -66,6 +69,7 @@ final class DebugCamera : Camera {
             }
         }
         if (Keyboard.IsKeyPressed(.escape)) {
+            // Unhide and unlock cursor when escape button pressed
             isCursorLocked = false
             CGAssociateMouseAndMouseCursorPosition(boolean_t(truncating: true))
             NSCursor.unhide()
@@ -74,6 +78,7 @@ final class DebugCamera : Camera {
             self.rotation.x -= deltaTime*Mouse.GetDY()*mouseSensitivity
             self.rotation.y -= deltaTime*Mouse.GetDX()*mouseSensitivity
         }
+
         self.position += self.velocity
         self.velocity -= self.velocity/35
     }

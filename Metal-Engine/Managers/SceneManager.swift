@@ -28,10 +28,12 @@ class SceneManager {
         }
     }
     
+    // Recursively render the scene
     public static func RenderScene(renderCommandEncoder: MTLRenderCommandEncoder) {
         currentScene.render(renderCommandEncoder: renderCommandEncoder)
     }
     
+    // Recursively update objects in the scene
     public static func TickScene(deltaTime: Float) {
         currentScene.updateCameras(deltaTime: deltaTime)
         currentScene.update(deltaTime: deltaTime)

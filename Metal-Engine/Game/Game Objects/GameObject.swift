@@ -8,6 +8,7 @@
 
 import MetalKit
 
+// Should be used for prefab objects
 class GameObject : Node {
     
     var uniforms = Uniforms()

@@ -8,6 +8,7 @@
 
 
 // Every scene has a camera manager
+// Holds the current camera for each scene
 class CameraManager {
     private var _cameras: [CameraTypes: Camera] = [:]
     public var currentCamera: Camera!

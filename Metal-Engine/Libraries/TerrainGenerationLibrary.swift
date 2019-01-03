@@ -50,6 +50,8 @@ class BasicTerrainGenerator: TerrainGenerator {
     }
     
     func createChunkTerrain(start: Position) {
+        // Get the chunk at the given position and loop through its blocks,
+        // updating the block type at each one
         let chunk = voxelManager.grid.getChunk(at: start)!
         for y: Int32 in 0..<16 {
             for z: Int32 in 0..<16 {

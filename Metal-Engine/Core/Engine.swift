@@ -16,6 +16,7 @@ final class Engine {
         self.Device = device
         self.CommandQueue = device.makeCommandQueue()
         
+        // Initialize all libraries
         ShaderLibrary.Initialize()
         VertexDescriptorLibrary.Intialize()
         DepthStencilStateLibrary.Intitialize()

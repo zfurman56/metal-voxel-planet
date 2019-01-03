@@ -8,6 +8,7 @@
 
 import simd
 
+// Syntactic sugar for MemoryLayout
 protocol sizeable {}
 extension sizeable {
     static var size: Int {
@@ -31,6 +32,7 @@ extension sizeable {
     }
 }
 
+// Optional array access - returns nil if element does not exist
 extension Collection where Indices.Iterator.Element == Index {
     subscript (safe index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil

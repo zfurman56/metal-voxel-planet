@@ -26,6 +26,7 @@ struct Voxel {
     }
 }
 
+// 2D integer position, typically used for chunk location
 struct Position: Hashable {
     let x: Int32
     let z: Int32
@@ -41,6 +42,7 @@ struct Position: Hashable {
     }
 }
 
+// 3D integer position, typically used for block location
 struct Position3D {
     let x: Int32
     let y: Int32
@@ -76,8 +78,11 @@ class Chunk {
 }
 
 
-// Internal representation of voxel grid - see VoxelTerrain for rendering
+// Internal representation of voxel grid - see RenderableChunk for rendering
+// Uses a page-like system for selecting chunks and voxel offset: upper 28 bits of the
+// position is the chunk location, lower 4 bits is the block offset within that chunk
 final class VoxelGrid {
+    // TODO: Optimize chunk hash table, potentially with UnsafePointer
     var chunks: [Position: Chunk] = [:]
     var cache: Chunk?
     

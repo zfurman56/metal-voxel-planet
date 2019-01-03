@@ -6,6 +6,8 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
+// TODO: Add remaining key codes so we don't get runtime errors
+// when an unrecognized key is pressed
 enum KeyCodes: UInt16 {
     //Special Chars
     case space             = 0x31

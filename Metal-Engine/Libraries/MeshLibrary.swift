@@ -41,6 +41,7 @@ class Prefab: Mesh {
     }
 }
 
+// Global singleton, manages prefab selection
 final class MeshLibrary {
     private static var meshes: [Mesh] = []
     

@@ -54,12 +54,14 @@ class Node {
         children.append(child)
     }
     
+    // Recursively update all children
     func update(deltaTime: Float) {
         for child in children {
             child.update(deltaTime: deltaTime)
         }
     }
     
+    // Recursively render all children
     func render(renderCommandEncoder: MTLRenderCommandEncoder) {
         for child in children {
             child.render(renderCommandEncoder: renderCommandEncoder)

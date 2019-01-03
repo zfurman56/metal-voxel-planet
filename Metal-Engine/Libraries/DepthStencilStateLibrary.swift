@@ -12,6 +12,7 @@ enum DepthStencilStateTypes : Int {
     case Less
 }
 
+// Global singleton, contains rendering options for depth buffer
 final class DepthStencilStateLibrary {
     
     private static var _depthStencilStates: [DepthStencilState] = []

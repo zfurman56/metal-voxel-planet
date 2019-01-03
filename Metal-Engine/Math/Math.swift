@@ -12,6 +12,7 @@ public let X_AXIS: float3 = float3(1, 0, 0)
 public let Y_AXIS: float3 = float3(0, 1, 0)
 public let Z_AXIS: float3 = float3(0, 0, 1)
 
+// Convenience functions for angle conversion
 extension Float {
     var toRadians: Float {
         return (self/180.0) * Float.pi
@@ -21,6 +22,7 @@ extension Float {
     }
 }
  
+// Matrix transformations
 extension matrix_float4x4 {
     mutating func translate(direction: float3) {
         var result = matrix_identity_float4x4

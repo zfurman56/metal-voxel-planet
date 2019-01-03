@@ -57,17 +57,22 @@ final class RenderableChunk : Node {
         updateUniforms()
     }
     
+    // In order to save GPU time, we should only render the block faces that
+    // are visible; i.e. faces that border air blocks
     public func updateMesh() {
         var vertices: [Vertex] = []
         
+        // Used to store which faces should be rendered
         var activeFaces: ContiguousArray<ContiguousArray<ContiguousArray<FaceBitPack>>> = ContiguousArray<ContiguousArray<ContiguousArray<FaceBitPack>>>(repeating: ContiguousArray<ContiguousArray<FaceBitPack>>(repeating: ContiguousArray<FaceBitPack>(repeating: FaceBitPack(), count: 16), count: 16), count: 16)
         
+        // Checks whether the given face is within the chunk, and updates activeFaces if it is
         func appendFace(_ x: Int32, _ y: Int32, _ z: Int32, face: CubeFaceType) {
             if ((x>=0) && (x<16) && (y>=0) && (y<16) && (z>=0) && (z<16)) {
                 activeFaces[Int(y)][Int(z)][Int(x)].byte |= (0x1<<face.rawValue)
             }
         }
         
+        // Loop through all possible air blocks that could affect this chunk
         for y: Int32 in -1..<17 {
             for z: Int32 in -1..<17 {
                 for x: Int32 in -1..<17 {
@@ -85,6 +90,7 @@ final class RenderableChunk : Node {
             }
         }
         
+        // Loop through all blocks in the chunk and add faces to the mesh
         let thisChunk = voxelManager.grid.getChunk(at: self.gridPosition)
         for y in 0..<16 {
             for z in 0..<16 {
@@ -106,6 +112,7 @@ final class RenderableChunk : Node {
         self.mesh = TerrainMesh(vertices: vertices)
     }
     
+    // Get the vertices of a cube face given the face type, position, and texture
     private static func cubeFace(position: float3, texture: float2, faceType: CubeFaceType)->[Vertex] {
         let face: [Vertex]
         let texSize: Float = 0.5
@@ -177,11 +184,14 @@ final class RenderableChunk : Node {
     
 }
 
+// Tell the command encoder how to render chunks
 extension RenderableChunk: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
         if (mesh.vertexBuffer != nil) {
             renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.PipelineState(.Basic))
             renderCommandEncoder.setDepthStencilState(DepthStencilStateLibrary.DepthStencilState(.Less))
+
+            // Don't bother using the fragment shader on faces we can't see
             renderCommandEncoder.setCullMode(MTLCullMode.front)
             
             // Vertex shader

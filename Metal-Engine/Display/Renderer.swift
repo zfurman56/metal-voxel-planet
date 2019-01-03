@@ -42,6 +42,8 @@ extension Renderer: MTKViewDelegate {
         commandBuffer?.present(drawable)
         commandBuffer?.commit()
         
+        // We can update the scene after doing the rendering (instead of before), so we
+        // minimize the time that the drawable exists
         SceneManager.TickScene(deltaTime: 1 / Float(view.preferredFramesPerSecond))
     }
 }

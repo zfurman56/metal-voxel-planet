@@ -26,6 +26,7 @@ class Texture {
     }
 }
 
+// Global singleton, manages texture selection
 final class TextureLibrary {
     private static var textures: [Texture] = []
     

@@ -12,6 +12,7 @@ enum VertexDescriptorTypes : Int {
     case Basic
 }
 
+// Global singleton, tells the GPU what attributes to expect from input data
 final class VertexDescriptorLibrary {
     
     private static var vertexDescriptors: [VertexDescriptor] = []

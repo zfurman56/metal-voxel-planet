@@ -37,7 +37,7 @@ class Mouse {
         self.overallMousePosition = position
     }
     
-    ///Sets the delta distance the mouse had moved
+    // Sets the delta distance the mouse had moved
     public static func SetMousePositionChange(overallPosition: float2, deltaPosition: float2){
         self.overallMousePosition = overallPosition
         self.mousePositionDelta += deltaPosition
@@ -48,33 +48,33 @@ class Mouse {
         scrollWheelChange += deltaY
     }
     
-    //Returns the overall position of the mouse on the current window
+    // Returns the overall position of the mouse on the current window
     public static func GetMouseWindowPosition()->float2{
         return overallMousePosition
     }
     
-    ///Returns the movement of the wheel since last time getDWheel() was called
+    // Returns the movement of the wheel since last time getDWheel() was called
     public static func GetDWheel()->Float{
         let position = scrollWheelChange
         scrollWheelChange = 0
         return position
     }
     
-    ///Movement on the y axis since last time getDY() was called.
+    // Movement on the y axis since last time getDY() was called.
     public static func GetDY()->Float{
         let result = mousePositionDelta.y
         mousePositionDelta.y = 0
         return result
     }
     
-    ///Movement on the x axis since last time getDX() was called.
+    // Movement on the x axis since last time getDX() was called.
     public static func GetDX()->Float{
         let result = mousePositionDelta.x
         mousePositionDelta.x = 0
         return result
     }
     
-    //Returns the mouse position in screen-view coordinates [-1, 1]
+    // Returns the mouse position in screen-view coordinates [-1, 1]
     public static func GetMouseViewportPosition()->float2{
         let x = (overallMousePosition.x - Renderer.ScreenSize.x * 0.5) / (Renderer.ScreenSize.x * 0.5)
         let y = (overallMousePosition.y - Renderer.ScreenSize.y * 0.5) / (Renderer.ScreenSize.y * 0.5)
