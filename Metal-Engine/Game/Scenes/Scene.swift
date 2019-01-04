@@ -11,7 +11,6 @@ import MetalKit
 // Base class for all scenes
 class Scene : Node {
     
-    var cameraManager = CameraManager()
     var sceneConstants = SceneConstants()
     var light: Light! // override this!
     
@@ -24,23 +23,23 @@ class Scene : Node {
     }
     
     func addCamera(_ camera: Camera, isCurrentCamera: Bool = true) {
-        cameraManager.registerCamera(camera: camera)
+        CameraManager.registerCamera(camera: camera)
         if (isCurrentCamera) {
-            cameraManager.setCamera(camera.cameraType)
+            CameraManager.setCamera(camera.cameraType)
         }
     }
     
     private func updateSceneConstants() {
-        sceneConstants.viewMatrix = cameraManager.currentCamera.viewMatrix
-        sceneConstants.projectionMatrix = cameraManager.currentCamera.projectionMatrix
+        sceneConstants.viewMatrix = CameraManager.currentCamera.viewMatrix
+        sceneConstants.projectionMatrix = CameraManager.currentCamera.projectionMatrix
     }
     
     public func updateCameras(deltaTime: Float) {
-        cameraManager.update(deltaTime: deltaTime)
+        CameraManager.update(deltaTime: deltaTime)
     }
     
     override func update(deltaTime: Float) {
-        cameraManager.currentCamera.update(deltaTime: deltaTime)
+        CameraManager.currentCamera.update(deltaTime: deltaTime)
         updateSceneConstants()
 
         super.update(deltaTime: deltaTime)

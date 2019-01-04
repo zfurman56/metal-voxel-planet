@@ -31,5 +31,9 @@ class SpaceScene : Scene {
         let diff = sphere.position-ballisticCamera.position
         ballisticCamera.addForce(force: (gravityCoef/simd_length(diff*diff))*simd_normalize(diff), deltaTime: deltaTime)
         super.update(deltaTime: deltaTime)
+        
+        if (simd_length(diff) < 110) {
+            SceneManager.SetScene(.Surface)
+        }
     }
 }

@@ -7,21 +7,20 @@
 //
 
 
-// Every scene has a camera manager
-// Holds the current camera for each scene
+// Global singleton, manages cameras
 class CameraManager {
-    private var _cameras: [CameraTypes: Camera] = [:]
-    public var currentCamera: Camera!
+    private static var _cameras: [CameraTypes: Camera] = [:]
+    public static var currentCamera: Camera!
     
-    public func registerCamera(camera: Camera) {
+    public static func registerCamera(camera: Camera) {
         self._cameras.updateValue(camera, forKey: camera.cameraType)
     }
     
-    public func setCamera(_ cameraType: CameraTypes) {
+    public static func setCamera(_ cameraType: CameraTypes) {
         self.currentCamera = _cameras[cameraType]
     }
     
-    internal func update(deltaTime: Float) {
+    internal static func update(deltaTime: Float) {
         for camera in _cameras.values {
             camera.update(deltaTime: deltaTime)
         }

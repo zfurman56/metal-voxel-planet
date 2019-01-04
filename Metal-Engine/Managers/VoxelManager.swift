@@ -35,7 +35,7 @@ final class VoxelManager {
     public func update() {
         // Find out if the camera moved into a different chunk - that would
         // mean that we have work to do
-        let cameraPos = SceneManager.currentScene.cameraManager.currentCamera.position
+        let cameraPos = CameraManager.currentCamera.position
         let chunkPosition = (self.grid.getChunkPosition(at: Position(cameraPos.x, cameraPos.z)))
         if (chunkPosition != currentChunk) {
             // We don't have to unload everything and load it again, we can just unload the chunks

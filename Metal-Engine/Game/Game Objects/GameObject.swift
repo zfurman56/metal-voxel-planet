@@ -19,7 +19,7 @@ class GameObject : Node {
     }
     
     private func updateUniforms() {
-        uniforms.modelViewProjectionMatrix = SceneManager.currentScene.cameraManager.currentCamera.projectionMatrix * SceneManager.currentScene.cameraManager.currentCamera.viewMatrix * self.modelMatrix
+        uniforms.modelViewProjectionMatrix = CameraManager.currentCamera.projectionMatrix * CameraManager.currentCamera.viewMatrix * self.modelMatrix
         uniforms.normalMatrix = self.normalMatrix
     }
 
