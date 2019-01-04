@@ -26,17 +26,18 @@ struct SphereFace {
     var origin: float3
     var right: float3
     var up: float3
+    var texelOffset: float2
 }
 
 // A dynamically generated sphere with given LOD
 final class DynamicSphere: GameObject {
     let faces: [SphereFace] = [
-        SphereFace(origin: float3(-1,-1,-1), right: float3( 1, 0, 0), up: float3(0, 1, 0)),   // Front
-        SphereFace(origin: float3( 1,-1,-1), right: float3( 0, 0, 1), up: float3(0, 1, 0)),   // Right
-        SphereFace(origin: float3( 1,-1, 1), right: float3(-1, 0, 0), up: float3(0, 1, 0)),   // Back
-        SphereFace(origin: float3(-1,-1, 1), right: float3( 0, 0,-1), up: float3(0, 1, 0)),   // Left
-        SphereFace(origin: float3(-1, 1,-1), right: float3( 1, 0, 0), up: float3(0, 0, 1)),   // Top
-        SphereFace(origin: float3(-1,-1, 1), right: float3( 1, 0, 0), up: float3(0, 0,-1))    // Bottom
+        SphereFace(origin: float3(-1,-1,-1), right: float3( 1, 0, 0), up: float3(0, 1, 0), texelOffset: float2(1/4, 1/3)),   // Front
+        SphereFace(origin: float3( 1,-1,-1), right: float3( 0, 0, 1), up: float3(0, 1, 0), texelOffset: float2(0/4, 1/3)),   // Right
+        SphereFace(origin: float3( 1,-1, 1), right: float3(-1, 0, 0), up: float3(0, 1, 0), texelOffset: float2(3/4, 1/3)),   // Back
+        SphereFace(origin: float3(-1,-1, 1), right: float3( 0, 0,-1), up: float3(0, 1, 0), texelOffset: float2(2/4, 1/3)),   // Left
+        SphereFace(origin: float3(-1, 1,-1), right: float3( 1, 0, 0), up: float3(0, 0, 1), texelOffset: float2(1/4, 0/3)),   // Top
+        SphereFace(origin: float3(-1,-1, 1), right: float3( 1, 0, 0), up: float3(0, 0,-1), texelOffset: float2(1/4, 2/3))    // Bottom
     ]
     
     var mesh: SphereMesh
@@ -48,7 +49,7 @@ final class DynamicSphere: GameObject {
 
         super.init()
         
-        updateMesh(subdivisionCount: 10)
+        updateMesh(subdivisionCount: 20)
     }
     
     // Uses spherified cube algorithm to generate sphere mesh
@@ -66,8 +67,13 @@ final class DynamicSphere: GameObject {
                     let rx: Float = p.x * sqrt(1.0 - 0.5 * (p2.y + p2.z) + p2.y*p2.z/3.0)
                     let ry: Float = p.y * sqrt(1.0 - 0.5 * (p2.z + p2.x) + p2.z*p2.x/3.0)
                     let rz: Float = p.z * sqrt(1.0 - 0.5 * (p2.x + p2.y) + p2.x*p2.y/3.0)
+                    var texture: float2 = float2((1-Float(i)/Float(subdivisionCount))/4, (1-Float(j)/Float(subdivisionCount))/3)
                     
-                    vertices.append(Vertex(position: float3(rx, ry, rz), texel: float2(0.8), normals: float3(rx, ry, rz)))
+//                    if (f.origin == float3(-1, 1, -1)) {
+//                        print("Texture: \(texture+f.texelOffset)")
+//                        texture = float2(0)
+//                    }
+                    vertices.append(Vertex(position: float3(rx, ry, rz), texel: texture+f.texelOffset, normals: float3(rx, ry, rz)))
                 }
             }
         }
@@ -111,7 +117,7 @@ extension DynamicSphere: Renderable {
         renderCommandEncoder.setVertexBuffer(mesh.vertexBuffer, offset: 0, index: 0)
         
         // Fragement shader
-        renderCommandEncoder.setFragmentTexture(TextureLibrary.getTexture(.Dirt).texture, index: 0)
+        renderCommandEncoder.setFragmentTexture(TextureLibrary.getTexture(.World).texture, index: 0)
         
         renderCommandEncoder.drawIndexedPrimitives(type: .triangle, indexCount: mesh.indexCount, indexType: MTLIndexType.uint16, indexBuffer: mesh.indexBuffer, indexBufferOffset: 0)
     }

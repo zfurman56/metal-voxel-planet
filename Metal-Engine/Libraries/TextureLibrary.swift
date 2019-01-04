@@ -10,6 +10,7 @@ import MetalKit
 
 enum TextureTypes : Int {
     case Dirt
+    case World
 }
 
 class Texture {
@@ -39,6 +40,9 @@ final class TextureLibrary {
         
         path = Bundle.main.url(forResource: "grass", withExtension: "jpg")
         textures.insert(Texture(device: device, filename: path), at: TextureTypes.Dirt.rawValue)
+        
+        path = Bundle.main.url(forResource: "world_cube_net", withExtension: "png")
+        textures.insert(Texture(device: device, filename: path), at: TextureTypes.World.rawValue)
     }
     
     public static func getTexture(_ textureType: TextureTypes)->Texture{
