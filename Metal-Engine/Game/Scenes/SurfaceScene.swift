@@ -30,6 +30,10 @@ class SurfaceScene : Scene {
         voxelManager.update()
         voxelManager.renderUpdate(deltaTime: deltaTime)
         super.update(deltaTime: deltaTime)
+        
+        if (debugCamera.position.y > 50) {
+            SceneManager.SetScene(.Space)
+        }
     }
     
 //    override func update(deltaTime: Float) {
