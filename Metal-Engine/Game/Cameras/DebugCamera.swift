@@ -14,7 +14,6 @@ final class DebugCamera : Camera {
     var position: float3 = float3(0)
     var velocity: float3 = float3(0)
     var rotation: float3 = float3(0)
-    var isCursorLocked: Bool = false
     
     let moveAccel: Float = 0.3
     let verticalSpeed: Float = 3
@@ -53,9 +52,7 @@ final class DebugCamera : Camera {
 
         if (Mouse.IsMouseButtonPressed(button: .left)) {
             // Hide and lock cursor when window clicked
-            isCursorLocked = true
-            CGAssociateMouseAndMouseCursorPosition(boolean_t(truncating: false))
-            NSCursor.hide()
+            CameraManager.setCursorLock(to: true)
             
             // See if we clicked a block, if so destroy it
             let unitVector = RotationToUnitVector(rotation: self.rotation)
@@ -70,11 +67,9 @@ final class DebugCamera : Camera {
         }
         if (Keyboard.IsKeyPressed(.escape)) {
             // Unhide and unlock cursor when escape button pressed
-            isCursorLocked = false
-            CGAssociateMouseAndMouseCursorPosition(boolean_t(truncating: true))
-            NSCursor.unhide()
+            CameraManager.setCursorLock(to: false)
         }
-        if (isCursorLocked) {
+        if (CameraManager.cursorLocked) {
             self.rotation.x -= deltaTime*Mouse.GetDY()*mouseSensitivity
             self.rotation.y -= deltaTime*Mouse.GetDX()*mouseSensitivity
         }

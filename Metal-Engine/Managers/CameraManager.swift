@@ -6,11 +6,13 @@
 //  Copyright © 2018 Zach Furman. All rights reserved.
 //
 
+import AppKit
 
 // Global singleton, manages cameras
 class CameraManager {
     private static var _cameras: [CameraTypes: Camera] = [:]
     public static var currentCamera: Camera!
+    public static var cursorLocked: Bool = false
     
     public static func registerCamera(camera: Camera) {
         self._cameras.updateValue(camera, forKey: camera.cameraType)
@@ -20,9 +22,18 @@ class CameraManager {
         self.currentCamera = _cameras[cameraType]
     }
     
-    internal static func update(deltaTime: Float) {
-        for camera in _cameras.values {
-            camera.update(deltaTime: deltaTime)
+    // Used to (un)hide and (un)lock the cursor when the window is selected
+    public static func setCursorLock(to isLocked: Bool) {
+        cursorLocked = isLocked
+        CGAssociateMouseAndMouseCursorPosition(boolean_t(exactly: (isLocked ? 0 : 1))!)
+        if (isLocked) {
+            NSCursor.hide()
+        } else {
+            NSCursor.unhide()
         }
+    }
+    
+    internal static func update(deltaTime: Float) {
+        currentCamera.update(deltaTime: deltaTime)
     }
 }
