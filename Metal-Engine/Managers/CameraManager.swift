@@ -10,16 +10,16 @@ import AppKit
 
 // Global singleton, manages cameras
 class CameraManager {
-    private static var _cameras: [CameraTypes: Camera] = [:]
+    public static var cameras: [CameraTypes: Camera] = [:]
     public static var currentCamera: Camera!
     public static var cursorLocked: Bool = false
     
     public static func registerCamera(camera: Camera) {
-        self._cameras.updateValue(camera, forKey: camera.cameraType)
+        self.cameras.updateValue(camera, forKey: camera.cameraType)
     }
     
     public static func setCamera(_ cameraType: CameraTypes) {
-        self.currentCamera = _cameras[cameraType]
+        self.currentCamera = cameras[cameraType]
     }
     
     // Used to (un)hide and (un)lock the cursor when the window is selected

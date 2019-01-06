@@ -16,7 +16,15 @@ class SpaceScene : Scene {
     override func buildScene() {
         light = Light(color: float3(1.0,1.0,1.0), direction: float3(0.0, 0.9, 0.435889894354), ambientIntensity: 0.05, diffuseIntensity: 0.9)
         
-        ballisticCamera.position.z = 220
+        ballisticCamera.position.z = 130
+        
+        var transform = matrix_identity_float4x4
+        transform.rotate(angle: Float(90).toRadians, axis: X_AXIS)
+        transform.scale(axis: float3(100))
+        
+        let velocity4 = simd_make_float4(CameraManager.cameras[.Debug]?.velocity ?? float3(0)) + float4(0,0,0,1)
+        ballisticCamera.velocity = simd_make_float3(transform * velocity4)
+        
         addCamera(ballisticCamera)
         
         sphere.scale = float3(100)
