@@ -22,10 +22,10 @@ class SpaceScene : Scene {
         transform.rotate(angle: Float(90).toRadians, axis: X_AXIS)
         transform.scale(axis: float3(100))
         
-        let velocity4 = simd_make_float4(CameraManager.cameras[.Debug]?.velocity ?? float3(0)) + float4(0,0,0,1)
+        let velocity4 = simd_make_float4(CameraManager.cameras["surface"]?.velocity ?? float3(0)) + float4(0,0,0,1)
         ballisticCamera.velocity = simd_make_float3(transform * velocity4)
         
-        addCamera(ballisticCamera)
+        addCamera(ballisticCamera, "space")
         
         sphere.scale = float3(100)
         addChild(sphere)

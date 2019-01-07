@@ -22,10 +22,10 @@ class Scene : Node {
     func buildScene () {
     }
     
-    func addCamera(_ camera: Camera, isCurrentCamera: Bool = true) {
-        CameraManager.registerCamera(camera: camera)
+    func addCamera(_ camera: Camera, _ cameraID: String, isCurrentCamera: Bool = true) {
+        CameraManager.registerCamera(camera: camera, cameraID: cameraID)
         if (isCurrentCamera) {
-            CameraManager.setCamera(camera.cameraType)
+            CameraManager.setCamera(cameraID)
         }
     }
     
