@@ -8,20 +8,6 @@
 
 import MetalKit
 
-final class SphereMesh : Mesh {
-    var indexBuffer: MTLBuffer!
-    var vertexBuffer: MTLBuffer!
-    var vertexCount: Int!
-    var indexCount: Int!
-    
-    init(vertices: [Vertex], indices: [UInt16]) {
-        self.vertexCount = vertices.count
-        self.indexCount = indices.count
-        self.indexBuffer = Engine.Device.makeBuffer(bytes: indices, length: UInt16.stride(indices.count), options: [])
-        self.vertexBuffer = Engine.Device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count), options: [])
-    }
-}
-
 struct SphereFace {
     var origin: float3
     var right: float3
@@ -40,12 +26,12 @@ final class DynamicSphere: GameObject {
         SphereFace(origin: float3(-1,-1, 1), right: float3( 1, 0, 0), up: float3(0, 0,-1), texelOffset: float2(1/4, 2/3))    // Bottom
     ]
     
-    var mesh: SphereMesh
+    var mesh: IndexedMesh
     
     override init() {
         // Swift won't let us generate the mesh before super.init(), but it also won't let us leave self.mesh
         // uninitialized before super.init(), so we give it this
-        self.mesh = SphereMesh(vertices: [Vertex(position: float3(0), texel: float2(0), normals: float3(0))], indices: [0])
+        self.mesh = IndexedMesh(vertices: [Vertex(position: float3(0), texel: float2(0), normals: float3(0))], indices: [0])
 
         super.init()
         
@@ -99,7 +85,7 @@ final class DynamicSphere: GameObject {
             }
         }
         
-        self.mesh = SphereMesh(vertices: vertices, indices: indices)
+        self.mesh = IndexedMesh(vertices: vertices, indices: indices)
     }
 }
 
