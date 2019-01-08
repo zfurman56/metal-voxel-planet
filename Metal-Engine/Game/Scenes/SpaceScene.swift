@@ -18,12 +18,16 @@ class SpaceScene : Scene {
         
         ballisticCamera.position.z = 130
         
+        let surfaceCamera = CameraManager.cameras["surface"]
+        
         var transform = matrix_identity_float4x4
         transform.rotate(angle: Float(90).toRadians, axis: X_AXIS)
-        transform.scale(axis: float3(0.1))
+        transform.scale(axis: float3(1))
         
-        let velocity4 = simd_make_float4(CameraManager.cameras["surface"]?.velocity ?? float3(0)) + float4(0,0,0,1)
+        let velocity4 = simd_make_float4(surfaceCamera?.velocity ?? float3(0)) + float4(0,0,0,1)
         ballisticCamera.velocity = simd_make_float3(transform * velocity4)
+        
+        ballisticCamera.rotation = (surfaceCamera?.rotation ?? float3(0)) + float3(Float(90).toRadians, 0, 0)
         
         addCamera(ballisticCamera, "space")
         
