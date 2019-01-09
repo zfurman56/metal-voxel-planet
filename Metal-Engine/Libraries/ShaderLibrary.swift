@@ -10,10 +10,12 @@ import MetalKit
 
 enum VertexShaderTypes : Int {
     case Basic
+    case Surface
 }
 
 enum FragmentShaderTypes : Int {
     case Basic
+    case Surface
 }
 
 // Global singleton, manages shader selection
@@ -31,6 +33,9 @@ final class ShaderLibrary {
     private static func createDefaultShaders() {
         vertexShaders.insert(Basic_VertexShader(), at: VertexShaderTypes.Basic.rawValue)
         fragmentShaders.insert(Basic_FragmentShader(), at: FragmentShaderTypes.Basic.rawValue)
+        
+        vertexShaders.insert(Surface_VertexShader(), at: VertexShaderTypes.Surface.rawValue)
+        fragmentShaders.insert(Surface_FragmentShader(), at: FragmentShaderTypes.Surface.rawValue)
     }
     
     public static func Vertex(_ vertexShaderType: VertexShaderTypes)->MTLFunction {
@@ -62,6 +67,26 @@ public class Basic_VertexShader: Shader {
 public class Basic_FragmentShader: Shader {
     public var name: String = "Basic Fragment Shader"
     public var functionName: String = "basic_fragment_shader"
+    public var function: MTLFunction!
+    init() {
+        function = ShaderLibrary.DefaultLibrary.makeFunction(name: functionName)
+        function?.label = name
+    }
+}
+
+public class Surface_VertexShader: Shader {
+    public var name: String = "Surface Vertex Shader"
+    public var functionName: String = "surface_vertex_shader"
+    public var function: MTLFunction!
+    init() {
+        function = ShaderLibrary.DefaultLibrary.makeFunction(name: functionName)
+        function?.label = name
+    }
+}
+
+public class Surface_FragmentShader: Shader {
+    public var name: String = "Surface Fragment Shader"
+    public var functionName: String = "surface_fragment_shader"
     public var function: MTLFunction!
     init() {
         function = ShaderLibrary.DefaultLibrary.makeFunction(name: functionName)

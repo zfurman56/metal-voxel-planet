@@ -27,6 +27,7 @@
 		9225991421DAA77F003E1EC8 /* SpaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225991321DAA77F003E1EC8 /* SpaceScene.swift */; };
 		923F0F2721DDA217003584C4 /* DynamicSphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923F0F2621DDA217003584C4 /* DynamicSphere.swift */; };
 		924714B621D34DC5004D1475 /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 924714B521D34DC5004D1475 /* grass.jpg */; };
+		924DC1D921E6BE7C008E989D /* SurfaceShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 924DC1D821E6BE7C008E989D /* SurfaceShaders.metal */; };
 		92516CF821D1CF5A00267DDD /* DepthStencilStateLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92516CF721D1CF5A00267DDD /* DepthStencilStateLibrary.swift */; };
 		92516CFD21D224AD00267DDD /* TextureLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92516CFC21D224AD00267DDD /* TextureLibrary.swift */; };
 		9264101121D0EF0200C4F5E5 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9264101021D0EF0200C4F5E5 /* GameObject.swift */; };
@@ -100,6 +101,7 @@
 		9225991321DAA77F003E1EC8 /* SpaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceScene.swift; sourceTree = "<group>"; };
 		923F0F2621DDA217003584C4 /* DynamicSphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSphere.swift; sourceTree = "<group>"; };
 		924714B521D34DC5004D1475 /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = grass.jpg; path = "Metal-Engine/Assets/grass.jpg"; sourceTree = SOURCE_ROOT; };
+		924DC1D821E6BE7C008E989D /* SurfaceShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SurfaceShaders.metal; sourceTree = "<group>"; };
 		92516CF721D1CF5A00267DDD /* DepthStencilStateLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthStencilStateLibrary.swift; sourceTree = "<group>"; };
 		92516CFC21D224AD00267DDD /* TextureLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLibrary.swift; sourceTree = "<group>"; };
 		9264101021D0EF0200C4F5E5 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				9221173721D0C59300D4D86D /* BasicShaders.metal */,
+				924DC1D821E6BE7C008E989D /* SurfaceShaders.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				9297274A21D4A2A2000303BB /* Voxel.swift in Sources */,
 				9264101121D0EF0200C4F5E5 /* GameObject.swift in Sources */,
 				92E967BA21D0FB0300E3F338 /* Node.swift in Sources */,
+				924DC1D921E6BE7C008E989D /* SurfaceShaders.metal in Sources */,
 				9221173A21D0DB3300D4D86D /* Types.swift in Sources */,
 				92FCB12C21D850CC001DC226 /* TerrainGenerationLibrary.swift in Sources */,
 				926F16CB21D196A900398F89 /* KeyCodes.swift in Sources */,

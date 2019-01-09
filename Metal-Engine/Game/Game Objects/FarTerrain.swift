@@ -86,7 +86,7 @@ final class FarTerrain: GameObject {
 // Tell the command encoder how to render our sphere
 extension FarTerrain: Renderable {
     func doRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.PipelineState(.Basic))
+        renderCommandEncoder.setRenderPipelineState(RenderPipelineStateLibrary.PipelineState(.Surface))
         renderCommandEncoder.setDepthStencilState(DepthStencilStateLibrary.DepthStencilState(.Less))
         
         // Don't bother using the fragment shader on faces we can't see

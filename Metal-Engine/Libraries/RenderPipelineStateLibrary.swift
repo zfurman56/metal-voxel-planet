@@ -11,6 +11,7 @@ import MetalKit
 
 enum RenderPipelineStateTypes : Int {
     case Basic
+    case Surface
 }
 
 // Global singleton, creates render pipeline state object from descriptor and caches it
@@ -24,6 +25,7 @@ final class RenderPipelineStateLibrary {
     
     private static func createDefaultRenderPipelineStates(){
         renderPipelineStates.insert(Basic_RenderPipelineState(), at: RenderPipelineStateTypes.Basic.rawValue)
+        renderPipelineStates.insert(Surface_RenderPipelineState(), at: RenderPipelineStateTypes.Surface.rawValue)
     }
     
     public static func PipelineState(_ renderPipelineStateType: RenderPipelineStateTypes)->MTLRenderPipelineState{
@@ -43,6 +45,18 @@ public class Basic_RenderPipelineState: RenderPipelineState {
     init() {
         do{
             renderPipelineState = try Engine.Device.makeRenderPipelineState(descriptor: RenderPipelineDescriptorLibrary.Descriptor(.Basic))
+        }catch let error as NSError {
+            print("ERROR::CREATE::RENDER_PIPELINE_STATE::__\(name)__::\(error)")
+        }
+    }
+}
+
+public class Surface_RenderPipelineState: RenderPipelineState {
+    var name: String = "Basic Render Pipeline State"
+    var renderPipelineState: MTLRenderPipelineState!
+    init() {
+        do{
+            renderPipelineState = try Engine.Device.makeRenderPipelineState(descriptor: RenderPipelineDescriptorLibrary.Descriptor(.Surface))
         }catch let error as NSError {
             print("ERROR::CREATE::RENDER_PIPELINE_STATE::__\(name)__::\(error)")
         }

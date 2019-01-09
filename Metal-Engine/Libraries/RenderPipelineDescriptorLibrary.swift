@@ -10,6 +10,7 @@ import MetalKit
 
 enum RenderPipelineDescriptorTypes : Int {
     case Basic
+    case Surface
 }
 
 // Global singleton, contains render pipeline options
@@ -22,6 +23,7 @@ final class RenderPipelineDescriptorLibrary {
 
     private static func createDefaultRenderPipelineDescriptors() {
         renderPipelineDescriptors.insert(Basic_RenderPipelineDescriptor(), at: RenderPipelineDescriptorTypes.Basic.rawValue)
+        renderPipelineDescriptors.insert(Surface_RenderPipelineDescriptor(), at: RenderPipelineDescriptorTypes.Surface.rawValue)
     }
 
     public static func Descriptor(_ renderPipelineDescriptorType: RenderPipelineDescriptorTypes)->MTLRenderPipelineDescriptor {
@@ -44,6 +46,20 @@ public class Basic_RenderPipelineDescriptor: RenderPipelineDescriptor {
         renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.MainDepthPixelFormat
         renderPipelineDescriptor.vertexFunction = ShaderLibrary.Vertex(.Basic)
         renderPipelineDescriptor.fragmentFunction = ShaderLibrary.Fragment(.Basic)
+        renderPipelineDescriptor.vertexDescriptor = VertexDescriptorLibrary.Descriptor(.Basic)
+    }
+}
+
+public class Surface_RenderPipelineDescriptor: RenderPipelineDescriptor {
+    var name: String = "Surface Render Pipeline Descriptor"
+    var renderPipelineDescriptor: MTLRenderPipelineDescriptor!
+    init() {
+        renderPipelineDescriptor = MTLRenderPipelineDescriptor()
+        
+        renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.MainPixelFormat
+        renderPipelineDescriptor.depthAttachmentPixelFormat = Preferences.MainDepthPixelFormat
+        renderPipelineDescriptor.vertexFunction = ShaderLibrary.Vertex(.Surface)
+        renderPipelineDescriptor.fragmentFunction = ShaderLibrary.Fragment(.Surface)
         renderPipelineDescriptor.vertexDescriptor = VertexDescriptorLibrary.Descriptor(.Basic)
     }
 }
