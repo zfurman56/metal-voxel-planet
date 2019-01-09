@@ -23,7 +23,7 @@
 		9221174821D0EB0300D4D86D /* RenderPipelineDescriptorLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221174721D0EB0300D4D86D /* RenderPipelineDescriptorLibrary.swift */; };
 		9221174A21D0EBE600D4D86D /* RenderPipelineStateLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221174921D0EBE600D4D86D /* RenderPipelineStateLibrary.swift */; };
 		9225048121D0F15E004F9EF3 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225048021D0F15E004F9EF3 /* Renderer.swift */; };
-		9225048321D0F5E9004F9EF3 /* MeshLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225048221D0F5E9004F9EF3 /* MeshLibrary.swift */; };
+		9225048321D0F5E9004F9EF3 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225048221D0F5E9004F9EF3 /* Mesh.swift */; };
 		9225991421DAA77F003E1EC8 /* SpaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225991321DAA77F003E1EC8 /* SpaceScene.swift */; };
 		923F0F2721DDA217003584C4 /* DynamicSphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923F0F2621DDA217003584C4 /* DynamicSphere.swift */; };
 		924714B621D34DC5004D1475 /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 924714B521D34DC5004D1475 /* grass.jpg */; };
@@ -38,6 +38,7 @@
 		926F16C721D1956500398F89 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F16C621D1956500398F89 /* Keyboard.swift */; };
 		926F16CB21D196A900398F89 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F16CA21D196A900398F89 /* KeyCodes.swift */; };
 		926F16CD21D1998D00398F89 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F16CC21D1998D00398F89 /* Mouse.swift */; };
+		928125AB21E4446A003C03BB /* FarTerrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928125AA21E4446A003C03BB /* FarTerrain.swift */; };
 		928677E521DE0FB80007CD82 /* PhysicsConformant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928677E421DE0FB80007CD82 /* PhysicsConformant.swift */; };
 		928677E721DE12610007CD82 /* BallisticCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928677E621DE12610007CD82 /* BallisticCamera.swift */; };
 		928677E921DE96F70007CD82 /* world_cube_net.png in Resources */ = {isa = PBXBuildFile; fileRef = 928677E821DE96F60007CD82 /* world_cube_net.png */; };
@@ -95,7 +96,7 @@
 		9221174721D0EB0300D4D86D /* RenderPipelineDescriptorLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPipelineDescriptorLibrary.swift; sourceTree = "<group>"; };
 		9221174921D0EBE600D4D86D /* RenderPipelineStateLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPipelineStateLibrary.swift; sourceTree = "<group>"; };
 		9225048021D0F15E004F9EF3 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
-		9225048221D0F5E9004F9EF3 /* MeshLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshLibrary.swift; sourceTree = "<group>"; };
+		9225048221D0F5E9004F9EF3 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
 		9225991321DAA77F003E1EC8 /* SpaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceScene.swift; sourceTree = "<group>"; };
 		923F0F2621DDA217003584C4 /* DynamicSphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSphere.swift; sourceTree = "<group>"; };
 		924714B521D34DC5004D1475 /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = grass.jpg; path = "Metal-Engine/Assets/grass.jpg"; sourceTree = SOURCE_ROOT; };
@@ -110,6 +111,7 @@
 		926F16C621D1956500398F89 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		926F16CA21D196A900398F89 /* KeyCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCodes.swift; sourceTree = "<group>"; };
 		926F16CC21D1998D00398F89 /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
+		928125AA21E4446A003C03BB /* FarTerrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarTerrain.swift; sourceTree = "<group>"; };
 		928677E421DE0FB80007CD82 /* PhysicsConformant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsConformant.swift; sourceTree = "<group>"; };
 		928677E621DE12610007CD82 /* BallisticCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallisticCamera.swift; sourceTree = "<group>"; };
 		928677E821DE96F60007CD82 /* world_cube_net.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = world_cube_net.png; path = "Metal-Engine/Assets/world_cube_net.png"; sourceTree = SOURCE_ROOT; };
@@ -235,6 +237,7 @@
 			children = (
 				926F16C521D1954B00398F89 /* Input */,
 				9221173921D0DB3300D4D86D /* Types.swift */,
+				9225048221D0F5E9004F9EF3 /* Mesh.swift */,
 				9221173F21D0DED400D4D86D /* Engine.swift */,
 				9221174121D0DFFC00D4D86D /* Preferences.swift */,
 			);
@@ -256,7 +259,6 @@
 				9221174521D0E8F000D4D86D /* VertexDescriptorLibrary.swift */,
 				9221174721D0EB0300D4D86D /* RenderPipelineDescriptorLibrary.swift */,
 				9221174921D0EBE600D4D86D /* RenderPipelineStateLibrary.swift */,
-				9225048221D0F5E9004F9EF3 /* MeshLibrary.swift */,
 				92516CFC21D224AD00267DDD /* TextureLibrary.swift */,
 				92516CF721D1CF5A00267DDD /* DepthStencilStateLibrary.swift */,
 				92FCB12B21D850CC001DC226 /* TerrainGenerationLibrary.swift */,
@@ -376,6 +378,7 @@
 				9264101021D0EF0200C4F5E5 /* GameObject.swift */,
 				929AF1B921D5BEC500C07564 /* RenderableChunk.swift */,
 				923F0F2621DDA217003584C4 /* DynamicSphere.swift */,
+				928125AA21E4446A003C03BB /* FarTerrain.swift */,
 			);
 			path = "Game Objects";
 			sourceTree = "<group>";
@@ -524,9 +527,10 @@
 				9221174621D0E8F100D4D86D /* VertexDescriptorLibrary.swift in Sources */,
 				926F16BF21D17F1A00398F89 /* Scene.swift in Sources */,
 				929AF1C621D75DF100C07564 /* VoxelRaycast.swift in Sources */,
+				928125AB21E4446A003C03BB /* FarTerrain.swift in Sources */,
 				9221173821D0C59300D4D86D /* MyShaders.metal in Sources */,
 				9221174221D0DFFC00D4D86D /* Preferences.swift in Sources */,
-				9225048321D0F5E9004F9EF3 /* MeshLibrary.swift in Sources */,
+				9225048321D0F5E9004F9EF3 /* Mesh.swift in Sources */,
 				929AF1BC21D5D7AB00C07564 /* SurfaceScene.swift in Sources */,
 				926F16CD21D1998D00398F89 /* Mouse.swift in Sources */,
 				9266D5FC21D1B53100CF59AD /* DebugCamera.swift in Sources */,

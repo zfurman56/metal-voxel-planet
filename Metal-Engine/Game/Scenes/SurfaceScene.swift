@@ -23,7 +23,7 @@ class SurfaceScene : Scene {
     
     override func render(renderCommandEncoder: MTLRenderCommandEncoder) {
         super.render(renderCommandEncoder: renderCommandEncoder)
-        voxelManager.renderChunks(renderCommandEncoder: renderCommandEncoder)
+        voxelManager.render(renderCommandEncoder: renderCommandEncoder)
     }
     
     override func update(deltaTime: Float) {

@@ -12,6 +12,7 @@ let voxelManager = VoxelManager()
 
 final class VoxelManager {
     let grid: VoxelGrid = VoxelGrid()
+    let farTerrain: FarTerrain = FarTerrain()
     
     // The chunk the camera is over
     var currentChunk: Position = Position(Int32(0), Int32(0))
@@ -68,6 +69,10 @@ final class VoxelManager {
                     unloadQueue.enqueue(Position(chunkPosition.x+x, currentChunk.z-chunkDist))
                 }
             }
+            
+            // Update the far terrain
+            farTerrain.updateMesh(center: chunkPosition)
+            
             currentChunk = chunkPosition
         }
         
@@ -120,17 +125,19 @@ final class VoxelManager {
             
     }
     
-    // Render every chunk that's loaded
-    public func renderChunks(renderCommandEncoder: MTLRenderCommandEncoder) {
+    // Render every chunk that's loaded and the far terrain
+    public func render(renderCommandEncoder: MTLRenderCommandEncoder) {
         for chunk in loadedChunks {
             chunk.render(renderCommandEncoder: renderCommandEncoder)
         }
+        farTerrain.render(renderCommandEncoder: renderCommandEncoder)
     }
     
-    // Update the rendering uniforms for every loaded chunk
+    // Update the rendering uniforms for every loaded chunk and the far terrain
     public func renderUpdate(deltaTime: Float) {
         for chunk in loadedChunks {
             chunk.update(deltaTime: deltaTime)
         }
+        farTerrain.update(deltaTime: deltaTime)
     }
 }
