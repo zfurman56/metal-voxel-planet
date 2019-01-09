@@ -41,3 +41,17 @@ final class FixedMesh : Mesh {
         self.vertexBuffer = Engine.Device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count), options: [])
     }
 }
+
+final class SafeFixedMesh : SafeMesh {
+    var vertexBuffer: MTLBuffer?
+    var vertexCount: Int!
+    
+    init(vertices: [Vertex]) {
+        self.vertexCount = vertices.count
+        if (vertices.count > 0) {
+            self.vertexBuffer = Engine.Device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count), options: [])
+        } else {
+            self.vertexBuffer = nil
+        }
+    }
+}

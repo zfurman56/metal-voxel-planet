@@ -8,20 +8,6 @@
 
 import MetalKit
 
-class TerrainMesh : SafeMesh {
-    var vertexBuffer: MTLBuffer?
-    var vertexCount: Int!
-    
-    init(vertices: [Vertex]) {
-        self.vertexCount = vertices.count
-        if (vertices.count > 0) {
-            self.vertexBuffer = Engine.Device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count), options: [])
-        } else {
-            self.vertexBuffer = nil
-        }
-    }
-}
-
 enum CubeFaceType: UInt8, CaseIterable {
     case Left
     case Right
@@ -40,7 +26,7 @@ struct FaceBitPack {
 }
 
 final class RenderableChunk : GameObject {
-    var mesh: TerrainMesh = TerrainMesh(vertices: [])
+    var mesh: SafeFixedMesh = SafeFixedMesh(vertices: [])
     var gridPosition: Position
     
     init(position: Position) {
@@ -104,7 +90,7 @@ final class RenderableChunk : GameObject {
             }
         }
         
-        self.mesh = TerrainMesh(vertices: vertices)
+        self.mesh = SafeFixedMesh(vertices: vertices)
     }
     
     // Get the vertices of a cube face given the face type, position, and texture
