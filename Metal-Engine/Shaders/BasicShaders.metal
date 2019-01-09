@@ -29,7 +29,8 @@ struct Light{
 };
 
 struct Uniforms {
-    float4x4 modelViewProjectionMatrix;
+    float4x4 modelViewMatrix;
+    float4x4 projectionMatrix;
     float3x3 normalMatrix;
 };
 
@@ -37,7 +38,7 @@ vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
                                           constant Uniforms &uniforms [[ buffer(1) ]]) {
     
     RasterizerData rd;
-    rd.position = uniforms.modelViewProjectionMatrix * float4(vIn.position, 1);
+    rd.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * float4(vIn.position, 1);
     rd.texel = vIn.texel;
     rd.normals = uniforms.normalMatrix*vIn.normals;
 

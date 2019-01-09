@@ -68,7 +68,8 @@ struct SceneConstants: sizeable {
 }
 
 struct Uniforms: sizeable {
-    var modelViewProjectionMatrix = matrix_identity_float4x4
+    var modelViewMatrix = matrix_identity_float4x4
+    var projectionMatrix = matrix_identity_float4x4
     var normalMatrix = matrix_identity_float3x3
 }
 
