@@ -51,29 +51,30 @@ final class FarTerrain: GameObject {
         let terrain = TerrainGenerationLibrary.getTerrain(.Basic)
         
         let texSize: Float = 0.5
+        let patchSize: Int = 16
         for x in -farDist...farDist  {
             for z in -farDist...farDist  {
-                if (abs(x) <= chunkDist) && (abs(z) <= chunkDist) {
+                if (abs(x*patchSize) <= chunkDist*16) && (abs(z*patchSize) <= chunkDist*16) {
                     continue
                 }
                 
-                let gridPosition = Position(Int32(16*(x+Int(center.x))), Int32(16*(z+Int(center.z))))
+                let gridPosition = Position(Int32((patchSize*x)+(16*Int(center.x))), Int32((patchSize*z)+(16*Int(center.z))))
                 let position = float3(Float(gridPosition.x), 0, Float(gridPosition.z))
                 
                 let heightA = terrain.getApproxHeight(position: gridPosition)
-                let heightB = terrain.getApproxHeight(position: Position(gridPosition.x, gridPosition.z+16))
-                let heightC = terrain.getApproxHeight(position: Position(gridPosition.x+16, gridPosition.z))
-                let heightD = terrain.getApproxHeight(position: Position(gridPosition.x+16, gridPosition.z+16))
+                let heightB = terrain.getApproxHeight(position: Position(gridPosition.x, gridPosition.z+Int32(patchSize)))
+                let heightC = terrain.getApproxHeight(position: Position(gridPosition.x+Int32(patchSize), gridPosition.z))
+                let heightD = terrain.getApproxHeight(position: Position(gridPosition.x+Int32(patchSize), gridPosition.z+Int32(patchSize)))
                 
-                let normal1 = simd_normalize(simd_cross(float3(0,heightB-heightA,-16), float3(-16,heightD-heightA,-16)))
-                let normal2 = simd_normalize(simd_cross(float3(-16,heightD-heightA,-16), float3(-16,heightC-heightA,0)))
+                let normal1 = simd_normalize(simd_cross(float3(0,heightB-heightA,Float(-patchSize)), float3(Float(-patchSize),heightD-heightA,Float(-patchSize))))
+                let normal2 = simd_normalize(simd_cross(float3(Float(-patchSize),heightD-heightA,Float(-patchSize)), float3(Float(-patchSize),heightC-heightA,0)))
                 
                 vertices.append(Vertex(position: position+float3(0,heightA,0), texel: float2(0, 0), normals: normal1))
-                vertices.append(Vertex(position: position+float3(0,heightB,16), texel: float2(0, texSize), normals: normal1))
-                vertices.append(Vertex(position: position+float3(16,heightD,16), texel: float2(texSize, texSize), normals: normal1))
+                vertices.append(Vertex(position: position+float3(0,heightB,Float(patchSize)), texel: float2(0, texSize), normals: normal1))
+                vertices.append(Vertex(position: position+float3(Float(patchSize),heightD,Float(patchSize)), texel: float2(texSize, texSize), normals: normal1))
                 
-                vertices.append(Vertex(position: position+float3(16,heightD,16), texel: float2(texSize, texSize), normals: normal2))
-                vertices.append(Vertex(position: position+float3(16,heightC,0), texel: float2(texSize, 0), normals: normal2))
+                vertices.append(Vertex(position: position+float3(Float(patchSize),heightD,Float(patchSize)), texel: float2(texSize, texSize), normals: normal2))
+                vertices.append(Vertex(position: position+float3(Float(patchSize),heightC,0), texel: float2(texSize, 0), normals: normal2))
                 vertices.append(Vertex(position: position+float3(0,heightA,0), texel: float2(0, 0), normals: normal2))
             }
         }
