@@ -24,7 +24,6 @@ final class FarTerrain: GameObject {
     
     public func updateMesh(center: Position) {
         var vertices: [Vertex] = []
-//        var indices: [UInt16] = []
         
         /*
          $ represents loaded voxels
@@ -48,23 +47,31 @@ final class FarTerrain: GameObject {
         */
         let chunkDist = Preferences.ChunkDistance
         let farDist = Preferences.FarDistance
+        
+        let terrain = TerrainGenerationLibrary.getTerrain(.Basic)
 
         let texSize: Float = 0.5
         for x in -farDist...farDist  {
             for z in -farDist...farDist  {
-                if (abs(x) < chunkDist) && (abs(z) < chunkDist) {
+                if (abs(x) <= chunkDist) && (abs(z) <= chunkDist) {
                     continue
                 }
                 
-                let position = float3(16*Float(x+Int(center.x)), 0, 16*Float(z+Int(center.z)))
+                let gridPosition = Position(Int32(16*(x+Int(center.x))), Int32(16*(z+Int(center.z))))
+                let position = float3(Float(gridPosition.x), 0, Float(gridPosition.z))
                 
-                vertices.append(Vertex(position: position+float3(0,0,0), texel: float2(0, 0), normals: float3(0, 1, 0)))
-                vertices.append(Vertex(position: position+float3(0,0,16), texel: float2(0, texSize), normals: float3(0, 1, 0)))
-                vertices.append(Vertex(position: position+float3(16,0,16), texel: float2(texSize, texSize), normals: float3(0, 1, 0)))
+                let heightA = terrain.getApproxHeight(position: gridPosition)
+                let heightB = terrain.getApproxHeight(position: Position(gridPosition.x, gridPosition.z+16))
+                let heightC = terrain.getApproxHeight(position: Position(gridPosition.x+16, gridPosition.z))
+                let heightD = terrain.getApproxHeight(position: Position(gridPosition.x+16, gridPosition.z+16))
                 
-                vertices.append(Vertex(position: position+float3(16,0,16), texel: float2(texSize, texSize), normals: float3(0, 1, 0)))
-                vertices.append(Vertex(position: position+float3(16,0,0), texel: float2(texSize, 0), normals: float3(0, 1, 0)))
-                vertices.append(Vertex(position: position+float3(0,0,0), texel: float2(0, 0), normals: float3(0, 1, 0)))
+                vertices.append(Vertex(position: position+float3(0,heightA,0), texel: float2(0, 0), normals: float3(0, 1, 0)))
+                vertices.append(Vertex(position: position+float3(0,heightB,16), texel: float2(0, texSize), normals: float3(0, 1, 0)))
+                vertices.append(Vertex(position: position+float3(16,heightD,16), texel: float2(texSize, texSize), normals: float3(0, 1, 0)))
+                
+                vertices.append(Vertex(position: position+float3(16,heightD,16), texel: float2(texSize, texSize), normals: float3(0, 1, 0)))
+                vertices.append(Vertex(position: position+float3(16,heightC,0), texel: float2(texSize, 0), normals: float3(0, 1, 0)))
+                vertices.append(Vertex(position: position+float3(0,heightA,0), texel: float2(0, 0), normals: float3(0, 1, 0)))
             }
         }
 

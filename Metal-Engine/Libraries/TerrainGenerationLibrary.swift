@@ -32,6 +32,7 @@ final class TerrainGenerationLibrary {
 protocol TerrainGenerator: AnyObject {
     var seed: Int {get}
 
+    func getApproxHeight(position: Position)->Float
     func getVoxelTerrain(position: Position3D)->VoxelType
     func createChunkTerrain(start: Position)
 }
@@ -45,8 +46,12 @@ class BasicTerrainGenerator: TerrainGenerator {
         self.noise = SuperSimplexNoise2D(amplitude: 4, frequency: 0.05, seed: seed)
     }
     
+    func getApproxHeight(position: Position) -> Float {
+        return Float(7 + self.noise.evaluate(Double(position.x), Double(position.z)))
+    }
+    
     func getVoxelTerrain(position: Position3D)->VoxelType {
-        return (position.y <= Int(7 + self.noise.evaluate(Double(position.x), Double(position.z)))) ? VoxelType.Dirt : VoxelType.Air
+        return (position.y <= Int(getApproxHeight(position: Position(position.x, position.z)))) ? VoxelType.Dirt : VoxelType.Air
     }
     
     func createChunkTerrain(start: Position) {
