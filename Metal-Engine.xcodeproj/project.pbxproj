@@ -14,7 +14,7 @@
 		9221171C21D0B99F00D4D86D /* Metal_EngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221171B21D0B99F00D4D86D /* Metal_EngineTests.swift */; };
 		9221172721D0B99F00D4D86D /* Metal_EngineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221172621D0B99F00D4D86D /* Metal_EngineUITests.swift */; };
 		9221173621D0BD7F00D4D86D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221173521D0BD7F00D4D86D /* GameView.swift */; };
-		9221173821D0C59300D4D86D /* MyShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9221173721D0C59300D4D86D /* MyShaders.metal */; };
+		9221173821D0C59300D4D86D /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9221173721D0C59300D4D86D /* BasicShaders.metal */; };
 		9221173A21D0DB3300D4D86D /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221173921D0DB3300D4D86D /* Types.swift */; };
 		9221174021D0DED400D4D86D /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221173F21D0DED400D4D86D /* Engine.swift */; };
 		9221174221D0DFFC00D4D86D /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221174121D0DFFC00D4D86D /* Preferences.swift */; };
@@ -87,7 +87,7 @@
 		9221172621D0B99F00D4D86D /* Metal_EngineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metal_EngineUITests.swift; sourceTree = "<group>"; };
 		9221172821D0B99F00D4D86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9221173521D0BD7F00D4D86D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		9221173721D0C59300D4D86D /* MyShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MyShaders.metal; sourceTree = "<group>"; };
+		9221173721D0C59300D4D86D /* BasicShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		9221173921D0DB3300D4D86D /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		9221173F21D0DED400D4D86D /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		9221174121D0DFFC00D4D86D /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 		9221173D21D0DD9300D4D86D /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				9221173721D0C59300D4D86D /* MyShaders.metal */,
+				9221173721D0C59300D4D86D /* BasicShaders.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -528,7 +528,7 @@
 				926F16BF21D17F1A00398F89 /* Scene.swift in Sources */,
 				929AF1C621D75DF100C07564 /* VoxelRaycast.swift in Sources */,
 				928125AB21E4446A003C03BB /* FarTerrain.swift in Sources */,
-				9221173821D0C59300D4D86D /* MyShaders.metal in Sources */,
+				9221173821D0C59300D4D86D /* BasicShaders.metal in Sources */,
 				9221174221D0DFFC00D4D86D /* Preferences.swift in Sources */,
 				9225048321D0F5E9004F9EF3 /* Mesh.swift in Sources */,
 				929AF1BC21D5D7AB00C07564 /* SurfaceScene.swift in Sources */,
