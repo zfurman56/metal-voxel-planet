@@ -8,10 +8,6 @@
 
 import MetalKit
 
-enum PrefabTypes : Int {
-    case CubePrefab
-}
-
 protocol Mesh: AnyObject {
     var vertexBuffer: MTLBuffer! { get }
     var vertexCount: Int! { get }
@@ -36,37 +32,12 @@ final class IndexedMesh : Mesh {
     }
 }
 
-class Prefab: Mesh {
-    var vertices: [Vertex]!
+final class FixedMesh : Mesh {
     var vertexBuffer: MTLBuffer!
-    var vertexCount: Int! {
-        return vertices.count
-    }
+    var vertexCount: Int!
     
-    init() {
-        createVertices()
-        createBuffers()
-    }
-    
-    func createVertices() {}
-    
-    func createBuffers() {
-        vertexBuffer = Engine.Device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count), options: [])
+    init(vertices: [Vertex]) {
+        self.vertexCount = vertices.count
+        self.vertexBuffer = Engine.Device.makeBuffer(bytes: vertices, length: Vertex.stride(vertices.count), options: [])
     }
 }
-
-// Global singleton, manages prefab selection
-final class MeshLibrary {
-    private static var meshes: [Mesh] = []
-    
-    public static func Initialize() {
-        createDefaultMeshes()
-    }
-    
-    private static func createDefaultMeshes() {}
-    
-    public static func Mesh(_ meshType: PrefabTypes)->Mesh{
-        return meshes[meshType.rawValue]
-    }
-}
-
