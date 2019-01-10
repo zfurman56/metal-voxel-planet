@@ -35,13 +35,28 @@ struct Uniforms {
     float3 cameraPosition;
 };
 
+
+// Warps flat terrain so as to apppear spherical
 vertex RasterizerData surface_vertex_shader(const VertexIn vIn [[ stage_in ]],
                                           constant Uniforms &uniforms [[ buffer(1) ]]) {
     
+    constexpr float radius = 1000;
     RasterizerData rd;
     
-    float4 relativePosition = uniforms.modelMatrix * float4(vIn.position, 1);
-    rd.position = uniforms.viewProjectionMatrix * relativePosition;
+    // Transform the vertex position to world space and make its position relative to the camera
+    float4 relativePosition = (uniforms.modelMatrix * float4(vIn.position, 1)) - float4(uniforms.cameraPosition, 1);
+    
+    // Get the horizontal distance between the vertex and the camera
+    float horizontalDist = sqrt((relativePosition.x*relativePosition.x) + (relativePosition.z*relativePosition.z));
+    
+    // Displace the y-component of the position based on the horizontal distance to the camera, making
+    // vertices farther away have greater displacement.
+    // Technically we should check if the stuff inside the square root is negative, but it hasn't
+    // caused problems yet 🤷‍♂️.
+    float yOff = sqrt((radius*radius)-(horizontalDist*horizontalDist)) - radius;
+    relativePosition.y += yOff;
+
+    rd.position = uniforms.viewProjectionMatrix * (relativePosition + float4(uniforms.cameraPosition, 1));
     
     rd.texel = vIn.texel;
     rd.normals = uniforms.normalMatrix*vIn.normals;
