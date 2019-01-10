@@ -29,16 +29,20 @@ struct Light{
 };
 
 struct Uniforms {
-    float4x4 modelViewMatrix;
-    float4x4 projectionMatrix;
+    float4x4 modelMatrix;
+    float4x4 viewProjectionMatrix;
     float3x3 normalMatrix;
+    float3 cameraPosition;
 };
 
 vertex RasterizerData surface_vertex_shader(const VertexIn vIn [[ stage_in ]],
                                           constant Uniforms &uniforms [[ buffer(1) ]]) {
     
     RasterizerData rd;
-    rd.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * float4(vIn.position, 1);
+    
+    float4 relativePosition = uniforms.modelMatrix * float4(vIn.position, 1);
+    rd.position = uniforms.viewProjectionMatrix * relativePosition;
+    
     rd.texel = vIn.texel;
     rd.normals = uniforms.normalMatrix*vIn.normals;
     

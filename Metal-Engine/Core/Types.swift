@@ -68,9 +68,10 @@ struct SceneConstants: sizeable {
 }
 
 struct Uniforms: sizeable {
-    var modelViewMatrix = matrix_identity_float4x4
-    var projectionMatrix = matrix_identity_float4x4
+    var modelMatrix = matrix_identity_float4x4
+    var viewProjectionMatrix = matrix_identity_float4x4
     var normalMatrix = matrix_identity_float3x3
+    var cameraPosition = float3(0)
 }
 
 // copied from https://github.com/raywenderlich/swift-algorithm-club/tree/master/Queue
