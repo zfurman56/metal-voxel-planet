@@ -47,11 +47,11 @@ final class FarTerrain: GameObject {
         */
         let chunkDist = Preferences.ChunkDistance
         let farDist = Preferences.FarDistance
+        let patchSize = Preferences.FarPatchSize
         
         let terrain = TerrainGenerationLibrary.getTerrain(.Basic)
         
         let texSize: Float = 0.5
-        let patchSize: Int = 16
         for x in -farDist...farDist  {
             for z in -farDist...farDist  {
                 if (abs(x*patchSize) <= chunkDist*16) && (abs(z*patchSize) <= chunkDist*16) {

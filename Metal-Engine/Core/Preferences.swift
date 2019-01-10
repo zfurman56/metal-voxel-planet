@@ -23,4 +23,5 @@ final class Preferences {
     public static var WorldSeed: Int = 1
     public static var ChunkDistance: Int = 4
     public static var FarDistance: Int = 30
+    public static var FarPatchSize: Int = 16
 }
