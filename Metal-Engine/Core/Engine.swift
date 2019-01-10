@@ -22,7 +22,7 @@ final class Engine {
         DepthStencilStateLibrary.Intitialize()
         RenderPipelineDescriptorLibrary.Initialize()
         RenderPipelineStateLibrary.Initialize()
-        TextureLibrary.Initialize(device: device)
+        TextureLibrary.Initialize()
         TerrainGenerationLibrary.Initialize(seed: Preferences.WorldSeed)
         SceneManager.Initialize(Preferences.StartingScene)
     }

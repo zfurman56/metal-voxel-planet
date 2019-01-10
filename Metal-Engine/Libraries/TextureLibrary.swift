@@ -13,13 +13,41 @@ enum TextureTypes : Int {
     case World
 }
 
-class Texture {
-    var texture: MTLTexture!
+// Global singleton, manages texture selection
+final class TextureLibrary {
+    private static var textures: [Texture] = []
     
-    init(device: MTLDevice, filename: URL) {
-        let textureLoader = MTKTextureLoader(device: device)
+    public static func Initialize() {
+        createDefaultTextures()
+    }
+    
+    private static func createDefaultTextures(){
+        textures.insert(DirtTexture(), at: TextureTypes.Dirt.rawValue)
+        textures.insert(WorldTexture(), at: TextureTypes.World.rawValue)
+    }
+    
+    public static func getTexture(_ textureType: TextureTypes)->Texture{
+        return textures[textureType.rawValue]
+    }
+}
+
+protocol Texture: AnyObject {
+    var texture: MTLTexture! {get set}
+    var fileName: String {get}
+    var fileExtension: String {get}
+}
+
+final class DirtTexture: Texture {
+    var texture: MTLTexture!
+    let fileName = "grass"
+    let fileExtension = "jpg"
+    
+    init() {
+        let path = Bundle.main.url(forResource: fileName, withExtension: fileExtension)
+        
+        let textureLoader = MTKTextureLoader(device: Engine.Device)
         do {
-            try texture = textureLoader.newTexture(URL: filename, options: [.generateMipmaps: true, .allocateMipmaps: true])
+            try texture = textureLoader.newTexture(URL: path!, options: [.generateMipmaps: true, .allocateMipmaps: true])
         } catch let error as NSError {
             print("Error loading texture!::\(error)")
             return
@@ -27,25 +55,20 @@ class Texture {
     }
 }
 
-// Global singleton, manages texture selection
-final class TextureLibrary {
-    private static var textures: [Texture] = []
+final class WorldTexture: Texture {
+    var texture: MTLTexture!
+    let fileName = "world_cube_net"
+    let fileExtension = "png"
     
-    public static func Initialize(device: MTLDevice) {
-        createDefaultTextures(device: device)
-    }
-    
-    private static func createDefaultTextures(device: MTLDevice){
-        var path: URL!
+    init() {
+        let path = Bundle.main.url(forResource: fileName, withExtension: fileExtension)
         
-        path = Bundle.main.url(forResource: "grass", withExtension: "jpg")
-        textures.insert(Texture(device: device, filename: path), at: TextureTypes.Dirt.rawValue)
-        
-        path = Bundle.main.url(forResource: "world_cube_net", withExtension: "png")
-        textures.insert(Texture(device: device, filename: path), at: TextureTypes.World.rawValue)
-    }
-    
-    public static func getTexture(_ textureType: TextureTypes)->Texture{
-        return textures[textureType.rawValue]
+        let textureLoader = MTKTextureLoader(device: Engine.Device)
+        do {
+            try texture = textureLoader.newTexture(URL: path!, options: [.generateMipmaps: true, .allocateMipmaps: true])
+        } catch let error as NSError {
+            print("Error loading texture!::\(error)")
+            return
+        }
     }
 }
