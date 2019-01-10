@@ -11,12 +11,12 @@ import MetalKit
 class SpaceScene : Scene {
     let ballisticCamera = BallisticCamera()
     let sphere = DynamicSphere()
-    let gravityCoef: Float = 100000
+    let gravityCoef: Float = 10000000
     
     override func buildScene() {
         light = Light(color: float3(1.0,1.0,1.0), direction: float3(0.0, 0.9, 0.435889894354), ambientIntensity: 0.05, diffuseIntensity: 0.9)
         
-        ballisticCamera.position.z = 130
+        ballisticCamera.position.z = 1200
         
         let surfaceCamera = CameraManager.cameras["surface"]
         
@@ -31,7 +31,7 @@ class SpaceScene : Scene {
         
         addCamera(ballisticCamera, "space")
         
-        sphere.scale = float3(100)
+        sphere.scale = float3(1000)
         addChild(sphere)
     }
     
@@ -44,7 +44,7 @@ class SpaceScene : Scene {
         ballisticCamera.addForce(force: (gravityCoef/simd_length(diff*diff))*simd_normalize(diff), deltaTime: deltaTime)
         super.update(deltaTime: deltaTime)
         
-        if (simd_length(diff) < 110) {
+        if (simd_length(diff) < 1199) {
             SceneManager.SetScene(.Surface)
         }
     }

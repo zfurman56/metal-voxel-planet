@@ -36,7 +36,7 @@ class SurfaceScene : Scene {
         
         super.update(deltaTime: deltaTime)
         
-        if (ballisticCamera.position.y > 50) {
+        if (ballisticCamera.position.y > 200) {
             SceneManager.SetScene(.Space)
         }
     }

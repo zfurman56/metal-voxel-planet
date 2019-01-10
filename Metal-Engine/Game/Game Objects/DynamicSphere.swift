@@ -103,7 +103,7 @@ extension DynamicSphere: Renderable {
         renderCommandEncoder.setVertexBuffer(mesh.vertexBuffer, offset: 0, index: 0)
         
         // Fragement shader
-        renderCommandEncoder.setFragmentTexture(TextureLibrary.getTexture(.World).texture, index: 0)
+        renderCommandEncoder.setFragmentTexture(TextureLibrary.getTexture(.Dirt).texture, index: 0)
         
         renderCommandEncoder.drawIndexedPrimitives(type: .triangle, indexCount: mesh.indexCount, indexType: MTLIndexType.uint16, indexBuffer: mesh.indexBuffer, indexBufferOffset: 0)
     }

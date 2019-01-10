@@ -25,7 +25,7 @@ final class BallisticCamera: Camera {
         return matrix_float4x4.perspective(degreesFov: 45,
                                            aspectRatio: Renderer.AspectRatio,
                                            near: 0.1,
-                                           far: 1000)
+                                           far: 10000)
     }
     
     func update(deltaTime: Float) {
