@@ -20,3 +20,6 @@ represented as a plane, and the voxels lie on a typical planar grid. We warp the
 spherical, but internally, it's still flat. At some distance from the surface, we transition between the space
 representation and the surface representation. In the worst case, there will some minor discontinuities in the transition
 due to distortion, but these are temporary and easily disguised.
+
+## Dependencies
+https://github.com/kelvin13/noise for gradient noise for terrain generation
