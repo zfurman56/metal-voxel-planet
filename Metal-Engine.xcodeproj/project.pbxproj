@@ -47,10 +47,10 @@
 		929AF1C221D5F14600C07564 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929AF1C121D5F14600C07564 /* CameraManager.swift */; };
 		929AF1C421D5F1FC00C07564 /* dirt.png in Resources */ = {isa = PBXBuildFile; fileRef = 929AF1C321D5F1FC00C07564 /* dirt.png */; };
 		92C32D3921D76F78000F2293 /* VoxelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C32D3821D76F78000F2293 /* VoxelManager.swift */; };
-		92C32D4021D82995000F2293 /* Noise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C32D3F21D82995000F2293 /* Noise.framework */; };
 		92E967BA21D0FB0300E3F338 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E967B921D0FB0300E3F338 /* Node.swift */; };
 		92E967BD21D0FBFE00E3F338 /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E967BC21D0FBFE00E3F338 /* Renderable.swift */; };
 		92FCB12C21D850CC001DC226 /* TerrainGenerationLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FCB12B21D850CC001DC226 /* TerrainGenerationLibrary.swift */; };
+		FAF4FA1729B6D359004CE5B0 /* Noise in Frameworks */ = {isa = PBXBuildFile; productRef = FAF4FA1629B6D359004CE5B0 /* Noise */; };
 		FAF4FA1929B6D634004CE5B0 /* VoxelRaycast.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4FA1829B6D634004CE5B0 /* VoxelRaycast.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,8 +117,6 @@
 		929AF1C121D5F14600C07564 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		929AF1C321D5F1FC00C07564 /* dirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt.png; sourceTree = "<group>"; };
 		92C32D3821D76F78000F2293 /* VoxelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoxelManager.swift; sourceTree = "<group>"; };
-		92C32D3D21D82933000F2293 /* Noise.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Noise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		92C32D3F21D82995000F2293 /* Noise.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Noise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E967B921D0FB0300E3F338 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		92E967BC21D0FBFE00E3F338 /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		92FCB12B21D850CC001DC226 /* TerrainGenerationLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainGenerationLibrary.swift; sourceTree = "<group>"; };
@@ -130,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92C32D4021D82995000F2293 /* Noise.framework in Frameworks */,
+				FAF4FA1729B6D359004CE5B0 /* Noise in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,8 +332,6 @@
 		92C32D3C21D82933000F2293 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				92C32D3F21D82995000F2293 /* Noise.framework */,
-				92C32D3D21D82933000F2293 /* Noise.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -376,6 +372,9 @@
 			dependencies = (
 			);
 			name = "Metal-Engine";
+			packageProductDependencies = (
+				FAF4FA1629B6D359004CE5B0 /* Noise */,
+			);
 			productName = "Metal-Engine";
 			productReference = 9221170221D0B99E00D4D86D /* Metal-Engine.app */;
 			productType = "com.apple.product-type.application";
@@ -454,6 +453,9 @@
 				Base,
 			);
 			mainGroup = 922116F921D0B99E00D4D86D;
+			packageReferences = (
+				FAF4FA1529B6D359004CE5B0 /* XCRemoteSwiftPackageReference "swift-noise" */,
+			);
 			productRefGroup = 9221170321D0B99E00D4D86D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -830,6 +832,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FAF4FA1529B6D359004CE5B0 /* XCRemoteSwiftPackageReference "swift-noise" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kelvin13/swift-noise";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FAF4FA1629B6D359004CE5B0 /* Noise */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAF4FA1529B6D359004CE5B0 /* XCRemoteSwiftPackageReference "swift-noise" */;
+			productName = Noise;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9221170921D0B99E00D4D86D /* Metal_Engine.xcdatamodeld */ = {
