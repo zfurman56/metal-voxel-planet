@@ -39,7 +39,10 @@ class Node {
     
     var normalMatrix: matrix_float3x3 {
         if ((prev_position != position) || (prev_scale != scale) || (prev_rotation != rotation)) {
-            _normalMatrix = float3x3(float3(Array((self.modelMatrix.columns.0)[0..<3])), float3(Array((self.modelMatrix.columns.1)[0..<3])), float3(Array((self.modelMatrix.columns.2)[0..<3])))
+            let column: simd_float4 = self.modelMatrix.columns.0
+            let arraySlice = column.xyz
+            let newSubArray = Array(arrayLiteral: arraySlice)
+            _normalMatrix = float3x3(self.modelMatrix.columns.0.xyz, self.modelMatrix.columns.1.xyz, self.modelMatrix.columns.2.xyz)
             _normalMatrix = _normalMatrix.inverse.transpose
             prev_position = position
             prev_scale = scale
@@ -72,4 +75,11 @@ class Node {
         }
     }
     
+}
+
+
+
+extension simd_float4
+{
+    var xyz: simd_float3 { simd_float3(x: self.x, y: self.y, z: self.z) }
 }
