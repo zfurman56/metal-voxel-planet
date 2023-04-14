@@ -39,9 +39,6 @@ class Node {
     
     var normalMatrix: matrix_float3x3 {
         if ((prev_position != position) || (prev_scale != scale) || (prev_rotation != rotation)) {
-            let column: simd_float4 = self.modelMatrix.columns.0
-            let arraySlice = column.xyz
-            let newSubArray = Array(arrayLiteral: arraySlice)
             _normalMatrix = float3x3(self.modelMatrix.columns.0.xyz, self.modelMatrix.columns.1.xyz, self.modelMatrix.columns.2.xyz)
             _normalMatrix = _normalMatrix.inverse.transpose
             prev_position = position
