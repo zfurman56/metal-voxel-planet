@@ -39,11 +39,11 @@ protocol TerrainGenerator: AnyObject {
 
 class BasicTerrainGenerator: TerrainGenerator {
     let seed: Int
-    let noise: SuperSimplexNoise2D
+    let noise: GradientNoise2D
     
     init(seed: Int) {
         self.seed = seed
-        self.noise = SuperSimplexNoise2D(amplitude: 4, frequency: 0.05, seed: seed)
+        self.noise = GradientNoise2D(amplitude: 4, frequency: 0.05, seed: seed)
     }
     
     func getApproxHeight(position: Position) -> Float {
